@@ -23,7 +23,7 @@ Miter is a lightweight terminal text editor written in C. It's a single-file imp
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/miter.git
+git clone https://github.com/deths74r/miter.git
 cd miter
 
 # Build (requires GCC and PCRE2)
@@ -145,6 +145,10 @@ Miter uses a simple architecture optimized for modern hardware:
 ## Relationship to Terra
 
 Miter was forked from [Terra](https://github.com/deths74r/terra), removing the SQLite/SQL processing functionality to create a focused, lightweight editor. Terra continues as a CLI text processing tool with SQL queries.
+
+## Contributing
+
+Contributions welcome! Please see [docs/CODING_STANDARDS.md](docs/CODING_STANDARDS.md) for code style guidelines.
 
 ## License
 
