@@ -1,0 +1,30 @@
+/* @name: Tritanopia Dark */
+/* Blue-blind friendly dark theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           240, 240, 240, "Normal text")
+X(SYNTAX_COMMENT,          140, 160, 160, "Comments")
+X(SYNTAX_KEYWORD1,         100, 220, 220, "Keywords - teal")
+X(SYNTAX_KEYWORD2,         150, 200, 200, "Type keywords - cyan")
+X(SYNTAX_STRING,           255, 150, 120, "Strings - coral")
+X(SYNTAX_NUMBER,           255, 180, 150, "Numbers - peach")
+X(SYNTAX_MATCH,            255, 100, 100, "Search match - bright red")
+
+/* UI elements */
+X(UI_BACKGROUND,            15,  20,  20, "Background")
+X(UI_FOREGROUND,           240, 240, 240, "Foreground")
+X(UI_LINE_NUMBER,           80, 110, 110, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  120, 220, 220, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    255, 140, 120, "Dirty line number")
+X(UI_LINE_NUMBER_BG,        10,  15,  15, "Line number gutter")
+X(UI_CURRENT_LINE,          25,  35,  35, "Current line highlight")
+X(UI_SELECTION_BG,          60,  90,  90, "Selection background")
+X(UI_SELECTION_FG,         255, 255, 255, "Selection text")
+X(UI_STATUS_BG,            100, 220, 220, "Status bar background")
+X(UI_STATUS_FG,             15,  20,  20, "Status bar text")
+X(UI_MESSAGE_BG,           255, 150, 120, "Message bar background")
+X(UI_MESSAGE_FG,            15,  20,  20, "Message bar text")
+X(UI_CURSOR,               100, 220, 220, "Cursor")
+X(UI_TILDE,                 55,  70,  70, "Empty line tilde")
+X(UI_BRACKET_MATCH,        255, 150, 120, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255, 100, 100, "Unmatched bracket")

@@ -1,0 +1,30 @@
+/* @name: Sunset Glow */
+/* Warm sunset gradient theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           255, 240, 230, "Normal text")
+X(SYNTAX_COMMENT,          150, 120, 110, "Comments")
+X(SYNTAX_KEYWORD1,         255, 120,  80, "Keywords - orange")
+X(SYNTAX_KEYWORD2,         255, 180, 120, "Type keywords - peach")
+X(SYNTAX_STRING,           200, 220, 160, "Strings - lime")
+X(SYNTAX_NUMBER,           255, 150, 150, "Numbers - pink")
+X(SYNTAX_MATCH,            255, 255, 180, "Search match")
+
+/* UI elements */
+X(UI_BACKGROUND,            40,  25,  30, "Background - dusk")
+X(UI_FOREGROUND,           255, 240, 230, "Foreground")
+X(UI_LINE_NUMBER,          130, 100,  95, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  200, 170, 160, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    255, 180, 100, "Dirty line number")
+X(UI_LINE_NUMBER_BG,        32,  18,  22, "Line number gutter")
+X(UI_CURRENT_LINE,          55,  38,  42, "Current line highlight")
+X(UI_SELECTION_BG,         120,  70,  70, "Selection background")
+X(UI_SELECTION_FG,         255, 255, 255, "Selection text")
+X(UI_STATUS_BG,            255, 120,  80, "Status bar background")
+X(UI_STATUS_FG,            255, 255, 255, "Status bar text")
+X(UI_MESSAGE_BG,           255, 180, 120, "Message bar background")
+X(UI_MESSAGE_FG,            40,  25,  30, "Message bar text")
+X(UI_CURSOR,               255, 120,  80, "Cursor")
+X(UI_TILDE,                 80,  55,  58, "Empty line tilde")
+X(UI_BRACKET_MATCH,        255, 120,  80, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255, 100, 100, "Unmatched bracket")

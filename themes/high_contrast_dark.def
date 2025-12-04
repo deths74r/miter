@@ -1,0 +1,30 @@
+/* @name: High Contrast Dark */
+/* Maximum contrast dark theme - WCAG AAA */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           255, 255, 255, "Normal text - pure white")
+X(SYNTAX_COMMENT,          150, 150, 150, "Comments - gray")
+X(SYNTAX_KEYWORD1,         255, 255, 255, "Keywords - white bold")
+X(SYNTAX_KEYWORD2,         220, 220, 220, "Type keywords - light gray")
+X(SYNTAX_STRING,           200, 200, 200, "Strings - gray")
+X(SYNTAX_NUMBER,           240, 240, 240, "Numbers - near white")
+X(SYNTAX_MATCH,            255, 255,   0, "Search match - bright yellow")
+
+/* UI elements */
+X(UI_BACKGROUND,             0,   0,   0, "Background - pure black")
+X(UI_FOREGROUND,           255, 255, 255, "Foreground - pure white")
+X(UI_LINE_NUMBER,          120, 120, 120, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  255, 255, 255, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    255, 200,   0, "Dirty line number")
+X(UI_LINE_NUMBER_BG,         0,   0,   0, "Line number gutter")
+X(UI_CURRENT_LINE,          30,  30,  30, "Current line highlight")
+X(UI_SELECTION_BG,         120, 120, 120, "Selection background")
+X(UI_SELECTION_FG,           0,   0,   0, "Selection text")
+X(UI_STATUS_BG,            255, 255, 255, "Status bar background")
+X(UI_STATUS_FG,              0,   0,   0, "Status bar text")
+X(UI_MESSAGE_BG,           220, 220, 220, "Message bar background")
+X(UI_MESSAGE_FG,             0,   0,   0, "Message bar text")
+X(UI_CURSOR,               255, 255, 255, "Cursor")
+X(UI_TILDE,                 80,  80,  80, "Empty line tilde")
+X(UI_BRACKET_MATCH,        255, 255, 255, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255, 255, 255, "Unmatched bracket")

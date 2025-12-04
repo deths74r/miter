@@ -1,0 +1,30 @@
+/* @name: Graphite */
+/* Neutral dark gray with subtle colors */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           210, 210, 210, "Normal text")
+X(SYNTAX_COMMENT,          110, 110, 110, "Comments")
+X(SYNTAX_KEYWORD1,         150, 180, 220, "Keywords - steel blue")
+X(SYNTAX_KEYWORD2,         180, 160, 200, "Type keywords - dusty purple")
+X(SYNTAX_STRING,           180, 210, 170, "Strings - sage")
+X(SYNTAX_NUMBER,           220, 180, 160, "Numbers - dusty rose")
+X(SYNTAX_MATCH,            255, 220, 130, "Search match")
+
+/* UI elements */
+X(UI_BACKGROUND,            32,  32,  32, "Background")
+X(UI_FOREGROUND,           210, 210, 210, "Foreground")
+X(UI_LINE_NUMBER,           90,  90,  90, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  160, 160, 160, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    220, 180, 100, "Dirty line number")
+X(UI_LINE_NUMBER_BG,        25,  25,  25, "Line number gutter")
+X(UI_CURRENT_LINE,          45,  45,  45, "Current line highlight")
+X(UI_SELECTION_BG,          70,  70,  70, "Selection background")
+X(UI_SELECTION_FG,         255, 255, 255, "Selection text")
+X(UI_STATUS_BG,            150, 180, 220, "Status bar background")
+X(UI_STATUS_FG,             32,  32,  32, "Status bar text")
+X(UI_MESSAGE_BG,           180, 210, 170, "Message bar background")
+X(UI_MESSAGE_FG,            32,  32,  32, "Message bar text")
+X(UI_CURSOR,               210, 210, 210, "Cursor")
+X(UI_TILDE,                 60,  60,  60, "Empty line tilde")
+X(UI_BRACKET_MATCH,        150, 180, 220, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      220, 100, 100, "Unmatched bracket")

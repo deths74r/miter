@@ -1,0 +1,30 @@
+/* @name: GitHub Light */
+/* GitHub light mode inspired theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,            36,  41,  47, "Normal text")
+X(SYNTAX_COMMENT,           87,  96, 106, "Comments")
+X(SYNTAX_KEYWORD1,         207,  34,  46, "Keywords - red")
+X(SYNTAX_KEYWORD2,           9, 105, 218, "Type keywords - blue")
+X(SYNTAX_STRING,            10, 105, 218, "Strings - blue")
+X(SYNTAX_NUMBER,             9, 105, 218, "Numbers - blue")
+X(SYNTAX_MATCH,            155, 117,   0, "Search match")
+
+/* UI elements */
+X(UI_BACKGROUND,           255, 255, 255, "Background")
+X(UI_FOREGROUND,            36,  41,  47, "Foreground")
+X(UI_LINE_NUMBER,          139, 148, 158, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,   36,  41,  47, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    155, 117,   0, "Dirty line number")
+X(UI_LINE_NUMBER_BG,       246, 248, 250, "Line number gutter")
+X(UI_CURRENT_LINE,         246, 248, 250, "Current line highlight")
+X(UI_SELECTION_BG,         180, 213, 255, "Selection background")
+X(UI_SELECTION_FG,          36,  41,  47, "Selection text")
+X(UI_STATUS_BG,            234, 238, 242, "Status bar background")
+X(UI_STATUS_FG,             36,  41,  47, "Status bar text")
+X(UI_MESSAGE_BG,             9, 105, 218, "Message bar background")
+X(UI_MESSAGE_FG,           255, 255, 255, "Message bar text")
+X(UI_CURSOR,                36,  41,  47, "Cursor")
+X(UI_TILDE,                175, 184, 193, "Empty line tilde")
+X(UI_BRACKET_MATCH,        155, 117,   0, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      207,  34,  46, "Unmatched bracket")

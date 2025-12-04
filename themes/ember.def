@@ -1,0 +1,30 @@
+/* @name: Ember */
+/* Warm glowing coal theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           235, 220, 200, "Normal text")
+X(SYNTAX_COMMENT,          130, 115, 100, "Comments")
+X(SYNTAX_KEYWORD1,         255, 140,  80, "Keywords - ember orange")
+X(SYNTAX_KEYWORD2,         255, 100,  60, "Type keywords - fire")
+X(SYNTAX_STRING,           200, 220, 160, "Strings - warm lime")
+X(SYNTAX_NUMBER,           255, 180, 120, "Numbers - glow")
+X(SYNTAX_MATCH,            255, 240, 140, "Search match")
+
+/* UI elements */
+X(UI_BACKGROUND,            28,  22,  18, "Background - ash")
+X(UI_FOREGROUND,           235, 220, 200, "Foreground")
+X(UI_LINE_NUMBER,          105,  90,  75, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  175, 160, 140, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    255, 160, 100, "Dirty line number")
+X(UI_LINE_NUMBER_BG,        20,  16,  12, "Line number gutter")
+X(UI_CURRENT_LINE,          42,  34,  28, "Current line highlight")
+X(UI_SELECTION_BG,          70,  55,  40, "Selection background")
+X(UI_SELECTION_FG,         255, 255, 255, "Selection text")
+X(UI_STATUS_BG,            255, 140,  80, "Status bar background")
+X(UI_STATUS_FG,             28,  22,  18, "Status bar text")
+X(UI_MESSAGE_BG,           255, 100,  60, "Message bar background")
+X(UI_MESSAGE_FG,           255, 255, 255, "Message bar text")
+X(UI_CURSOR,               255, 140,  80, "Cursor")
+X(UI_TILDE,                 65,  55,  45, "Empty line tilde")
+X(UI_BRACKET_MATCH,        255, 140,  80, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255,  80,  80, "Unmatched bracket")

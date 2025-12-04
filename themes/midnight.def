@@ -1,0 +1,30 @@
+/* @name: Midnight */
+/* Deep blue-black theme for late night coding */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           200, 210, 220, "Normal text")
+X(SYNTAX_COMMENT,           80,  90, 110, "Comments")
+X(SYNTAX_KEYWORD1,         130, 170, 255, "Keywords - bright blue")
+X(SYNTAX_KEYWORD2,         180, 140, 255, "Type keywords - purple")
+X(SYNTAX_STRING,           140, 220, 180, "Strings - seafoam")
+X(SYNTAX_NUMBER,           255, 180, 130, "Numbers - peach")
+X(SYNTAX_MATCH,            255, 220, 100, "Search match - gold")
+
+/* UI elements */
+X(UI_BACKGROUND,            15,  20,  35, "Background")
+X(UI_FOREGROUND,           200, 210, 220, "Foreground")
+X(UI_LINE_NUMBER,           70,  80, 100, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  150, 170, 200, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    255, 180, 100, "Dirty line number")
+X(UI_LINE_NUMBER_BG,        10,  15,  28, "Line number gutter")
+X(UI_CURRENT_LINE,          25,  35,  55, "Current line highlight")
+X(UI_SELECTION_BG,          60,  80, 120, "Selection background")
+X(UI_SELECTION_FG,         255, 255, 255, "Selection text")
+X(UI_STATUS_BG,             40,  60, 100, "Status bar background")
+X(UI_STATUS_FG,            220, 230, 240, "Status bar text")
+X(UI_MESSAGE_BG,           100, 140, 200, "Message bar background")
+X(UI_MESSAGE_FG,            20,  25,  35, "Message bar text")
+X(UI_CURSOR,               200, 210, 220, "Cursor")
+X(UI_TILDE,                 50,  60,  80, "Empty line tilde")
+X(UI_BRACKET_MATCH,        130, 170, 255, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255, 100, 100, "Unmatched bracket")

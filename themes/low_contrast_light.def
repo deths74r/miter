@@ -1,0 +1,30 @@
+/* @name: Low Contrast Light */
+/* Gentle light theme for sensitive eyes */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,            80,  80,  85, "Normal text")
+X(SYNTAX_COMMENT,          140, 140, 145, "Comments")
+X(SYNTAX_KEYWORD1,          90,  80, 110, "Keywords - muted purple")
+X(SYNTAX_KEYWORD2,          80,  95, 115, "Type keywords - muted blue")
+X(SYNTAX_STRING,            85, 100,  80, "Strings - muted green")
+X(SYNTAX_NUMBER,           110,  85,  80, "Numbers - muted rust")
+X(SYNTAX_MATCH,            200, 195, 180, "Search match")
+
+/* UI elements */
+X(UI_BACKGROUND,           235, 235, 232, "Background")
+X(UI_FOREGROUND,            80,  80,  85, "Foreground")
+X(UI_LINE_NUMBER,          160, 160, 165, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  110, 110, 115, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    140, 125, 100, "Dirty line number")
+X(UI_LINE_NUMBER_BG,       230, 230, 227, "Line number gutter")
+X(UI_CURRENT_LINE,         225, 225, 222, "Current line highlight")
+X(UI_SELECTION_BG,         200, 200, 195, "Selection background")
+X(UI_SELECTION_FG,          60,  60,  65, "Selection text")
+X(UI_STATUS_BG,            200, 200, 195, "Status bar background")
+X(UI_STATUS_FG,             80,  80,  85, "Status bar text")
+X(UI_MESSAGE_BG,           195, 195, 190, "Message bar background")
+X(UI_MESSAGE_FG,            80,  80,  85, "Message bar text")
+X(UI_CURSOR,                80,  80,  85, "Cursor")
+X(UI_TILDE,                190, 190, 185, "Empty line tilde")
+X(UI_BRACKET_MATCH,         90,  80, 110, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      130, 100, 100, "Unmatched bracket")

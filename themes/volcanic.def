@@ -1,0 +1,30 @@
+/* @name: Volcanic */
+/* Dark theme with fiery accents */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           230, 220, 210, "Normal text")
+X(SYNTAX_COMMENT,          120, 110, 100, "Comments")
+X(SYNTAX_KEYWORD1,         255, 100,  60, "Keywords - fire orange")
+X(SYNTAX_KEYWORD2,         255, 180,  80, "Type keywords - amber")
+X(SYNTAX_STRING,           200, 220, 160, "Strings - pale lime")
+X(SYNTAX_NUMBER,           255, 150, 100, "Numbers - coral")
+X(SYNTAX_MATCH,            255, 255, 100, "Search match - bright yellow")
+
+/* UI elements */
+X(UI_BACKGROUND,            25,  20,  18, "Background - dark brown")
+X(UI_FOREGROUND,           230, 220, 210, "Foreground")
+X(UI_LINE_NUMBER,          100,  90,  80, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  180, 170, 160, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    255, 150,  80, "Dirty line number")
+X(UI_LINE_NUMBER_BG,        18,  15,  12, "Line number gutter")
+X(UI_CURRENT_LINE,          40,  32,  28, "Current line highlight")
+X(UI_SELECTION_BG,          80,  50,  40, "Selection background")
+X(UI_SELECTION_FG,         255, 255, 255, "Selection text")
+X(UI_STATUS_BG,            255, 100,  60, "Status bar background")
+X(UI_STATUS_FG,             25,  20,  18, "Status bar text")
+X(UI_MESSAGE_BG,           255, 180,  80, "Message bar background")
+X(UI_MESSAGE_FG,            25,  20,  18, "Message bar text")
+X(UI_CURSOR,               255, 100,  60, "Cursor")
+X(UI_TILDE,                 60,  50,  45, "Empty line tilde")
+X(UI_BRACKET_MATCH,        255, 100,  60, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255,  60,  60, "Unmatched bracket")

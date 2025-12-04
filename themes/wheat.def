@@ -1,0 +1,30 @@
+/* @name: Wheat */
+/* Golden wheat field theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,            60,  50,  35, "Normal text")
+X(SYNTAX_COMMENT,          155, 145, 125, "Comments")
+X(SYNTAX_KEYWORD1,         160, 110,  40, "Keywords - golden")
+X(SYNTAX_KEYWORD2,          80, 115, 150, "Type keywords - sky")
+X(SYNTAX_STRING,            95, 130,  75, "Strings - grass")
+X(SYNTAX_NUMBER,           170, 115,  65, "Numbers - amber")
+X(SYNTAX_MATCH,            255, 240, 200, "Search match")
+
+/* UI elements */
+X(UI_BACKGROUND,           252, 248, 235, "Background - wheat")
+X(UI_FOREGROUND,            60,  50,  35, "Foreground")
+X(UI_LINE_NUMBER,          190, 180, 160, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  110, 100,  80, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    200, 150,  70, "Dirty line number")
+X(UI_LINE_NUMBER_BG,       246, 242, 228, "Line number gutter")
+X(UI_CURRENT_LINE,         248, 244, 228, "Current line highlight")
+X(UI_SELECTION_BG,         235, 220, 180, "Selection background")
+X(UI_SELECTION_FG,          60,  50,  35, "Selection text")
+X(UI_STATUS_BG,            160, 110,  40, "Status bar background")
+X(UI_STATUS_FG,            255, 255, 255, "Status bar text")
+X(UI_MESSAGE_BG,            80, 115, 150, "Message bar background")
+X(UI_MESSAGE_FG,           255, 255, 255, "Message bar text")
+X(UI_CURSOR,                60,  50,  35, "Cursor")
+X(UI_TILDE,                210, 200, 180, "Empty line tilde")
+X(UI_BRACKET_MATCH,        160, 110,  40, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      180,  75,  75, "Unmatched bracket")

@@ -1,0 +1,30 @@
+/* @name: Neon */
+/* Bright neon on dark theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           255, 255, 255, "Normal text")
+X(SYNTAX_COMMENT,           80, 100, 120, "Comments")
+X(SYNTAX_KEYWORD1,         255,  50, 200, "Keywords - hot pink")
+X(SYNTAX_KEYWORD2,          50, 255, 255, "Type keywords - cyan")
+X(SYNTAX_STRING,            50, 255, 100, "Strings - neon green")
+X(SYNTAX_NUMBER,           255, 200,  50, "Numbers - yellow")
+X(SYNTAX_MATCH,            255, 100, 100, "Search match - red")
+
+/* UI elements */
+X(UI_BACKGROUND,            10,  10,  20, "Background - near black")
+X(UI_FOREGROUND,           255, 255, 255, "Foreground")
+X(UI_LINE_NUMBER,           80,  80, 100, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  200, 200, 220, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    255, 150,  50, "Dirty line number")
+X(UI_LINE_NUMBER_BG,         5,   5,  15, "Line number gutter")
+X(UI_CURRENT_LINE,          20,  20,  35, "Current line highlight")
+X(UI_SELECTION_BG,         255,  50, 200, "Selection background")
+X(UI_SELECTION_FG,          10,  10,  20, "Selection text")
+X(UI_STATUS_BG,            255,  50, 200, "Status bar background")
+X(UI_STATUS_FG,            255, 255, 255, "Status bar text")
+X(UI_MESSAGE_BG,            50, 255, 100, "Message bar background")
+X(UI_MESSAGE_FG,            10,  10,  20, "Message bar text")
+X(UI_CURSOR,               255,  50, 200, "Cursor")
+X(UI_TILDE,                 50,  50,  70, "Empty line tilde")
+X(UI_BRACKET_MATCH,        255,  50, 200, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255, 100, 100, "Unmatched bracket")

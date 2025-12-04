@@ -1,0 +1,30 @@
+/* @name: Abyss */
+/* Deep ocean dark theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           180, 200, 220, "Normal text")
+X(SYNTAX_COMMENT,           70,  90, 120, "Comments")
+X(SYNTAX_KEYWORD1,          80, 180, 255, "Keywords - ocean blue")
+X(SYNTAX_KEYWORD2,         150, 220, 255, "Type keywords - sky")
+X(SYNTAX_STRING,           100, 220, 200, "Strings - aqua")
+X(SYNTAX_NUMBER,           200, 180, 255, "Numbers - lavender")
+X(SYNTAX_MATCH,            255, 230, 150, "Search match")
+
+/* UI elements */
+X(UI_BACKGROUND,             5,  15,  30, "Background - deep ocean")
+X(UI_FOREGROUND,           180, 200, 220, "Foreground")
+X(UI_LINE_NUMBER,           50,  70, 100, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  120, 150, 190, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    255, 200, 100, "Dirty line number")
+X(UI_LINE_NUMBER_BG,         3,  10,  22, "Line number gutter")
+X(UI_CURRENT_LINE,          15,  30,  50, "Current line highlight")
+X(UI_SELECTION_BG,          40,  70, 110, "Selection background")
+X(UI_SELECTION_FG,         255, 255, 255, "Selection text")
+X(UI_STATUS_BG,             80, 180, 255, "Status bar background")
+X(UI_STATUS_FG,              5,  15,  30, "Status bar text")
+X(UI_MESSAGE_BG,           100, 220, 200, "Message bar background")
+X(UI_MESSAGE_FG,             5,  15,  30, "Message bar text")
+X(UI_CURSOR,                80, 180, 255, "Cursor")
+X(UI_TILDE,                 30,  50,  80, "Empty line tilde")
+X(UI_BRACKET_MATCH,         80, 180, 255, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255, 100, 100, "Unmatched bracket")

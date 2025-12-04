@@ -1,0 +1,30 @@
+/* @name: Snow */
+/* Cool blue-white theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,            30,  40,  50, "Normal text")
+X(SYNTAX_COMMENT,          130, 140, 160, "Comments")
+X(SYNTAX_KEYWORD1,          60, 100, 180, "Keywords - blue")
+X(SYNTAX_KEYWORD2,         100, 140, 200, "Type keywords - light blue")
+X(SYNTAX_STRING,            80, 140, 120, "Strings - teal")
+X(SYNTAX_NUMBER,           140, 100, 160, "Numbers - purple")
+X(SYNTAX_MATCH,            255, 240, 180, "Search match")
+
+/* UI elements */
+X(UI_BACKGROUND,           250, 252, 255, "Background - snow")
+X(UI_FOREGROUND,            30,  40,  50, "Foreground")
+X(UI_LINE_NUMBER,          170, 180, 195, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,   80,  95, 115, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    180, 140, 100, "Dirty line number")
+X(UI_LINE_NUMBER_BG,       242, 245, 250, "Line number gutter")
+X(UI_CURRENT_LINE,         240, 245, 252, "Current line highlight")
+X(UI_SELECTION_BG,         180, 210, 250, "Selection background")
+X(UI_SELECTION_FG,          30,  40,  50, "Selection text")
+X(UI_STATUS_BG,             60, 100, 180, "Status bar background")
+X(UI_STATUS_FG,            255, 255, 255, "Status bar text")
+X(UI_MESSAGE_BG,            80, 140, 120, "Message bar background")
+X(UI_MESSAGE_FG,           255, 255, 255, "Message bar text")
+X(UI_CURSOR,                30,  40,  50, "Cursor")
+X(UI_TILDE,                200, 210, 225, "Empty line tilde")
+X(UI_BRACKET_MATCH,         60, 100, 180, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      200,  80,  80, "Unmatched bracket")

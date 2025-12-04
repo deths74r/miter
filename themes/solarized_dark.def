@@ -1,0 +1,30 @@
+/* @name: Solarized Dark */
+/* Precision colors for dark background */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           131, 148, 150, "Normal text - base0")
+X(SYNTAX_COMMENT,           88, 110, 117, "Comments - base01")
+X(SYNTAX_KEYWORD1,         133, 153,   0, "Keywords - green")
+X(SYNTAX_KEYWORD2,          38, 139, 210, "Type keywords - blue")
+X(SYNTAX_STRING,            42, 161, 152, "Strings - cyan")
+X(SYNTAX_NUMBER,           203,  75,  22, "Numbers - orange")
+X(SYNTAX_MATCH,            181, 137,   0, "Search match - yellow")
+
+/* UI elements */
+X(UI_BACKGROUND,             0,  43,  54, "Background - base03")
+X(UI_FOREGROUND,           131, 148, 150, "Foreground - base0")
+X(UI_LINE_NUMBER,           88, 110, 117, "Line numbers - base01")
+X(UI_LINE_NUMBER_CURRENT,  147, 161, 161, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    203,  75,  22, "Dirty line number")
+X(UI_LINE_NUMBER_BG,         7,  54,  66, "Line number gutter")
+X(UI_CURRENT_LINE,           7,  54,  66, "Current line highlight")
+X(UI_SELECTION_BG,          88, 110, 117, "Selection background")
+X(UI_SELECTION_FG,         253, 246, 227, "Selection text")
+X(UI_STATUS_BG,             88, 110, 117, "Status bar background")
+X(UI_STATUS_FG,            253, 246, 227, "Status bar text")
+X(UI_MESSAGE_BG,            38, 139, 210, "Message bar background")
+X(UI_MESSAGE_FG,             0,  43,  54, "Message bar text")
+X(UI_CURSOR,               131, 148, 150, "Cursor")
+X(UI_TILDE,                 88, 110, 117, "Empty line tilde")
+X(UI_BRACKET_MATCH,        181, 137,   0, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      220,  50,  47, "Unmatched bracket")

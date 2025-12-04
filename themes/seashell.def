@@ -1,0 +1,30 @@
+/* @name: Seashell */
+/* Pale warm beige theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,            50,  45,  45, "Normal text")
+X(SYNTAX_COMMENT,          150, 145, 140, "Comments")
+X(SYNTAX_KEYWORD1,         150,  90,  80, "Keywords - coral")
+X(SYNTAX_KEYWORD2,          80, 130, 160, "Type keywords - ocean blue")
+X(SYNTAX_STRING,           100, 135,  90, "Strings - sage")
+X(SYNTAX_NUMBER,           160, 110,  90, "Numbers - sand")
+X(SYNTAX_MATCH,            255, 235, 210, "Search match")
+
+/* UI elements */
+X(UI_BACKGROUND,           255, 250, 245, "Background - seashell")
+X(UI_FOREGROUND,            50,  45,  45, "Foreground")
+X(UI_LINE_NUMBER,          190, 185, 175, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  105, 100,  95, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    200, 150,  90, "Dirty line number")
+X(UI_LINE_NUMBER_BG,       250, 245, 238, "Line number gutter")
+X(UI_CURRENT_LINE,         252, 246, 240, "Current line highlight")
+X(UI_SELECTION_BG,         240, 215, 195, "Selection background")
+X(UI_SELECTION_FG,          50,  45,  45, "Selection text")
+X(UI_STATUS_BG,            150,  90,  80, "Status bar background")
+X(UI_STATUS_FG,            255, 255, 255, "Status bar text")
+X(UI_MESSAGE_BG,            80, 130, 160, "Message bar background")
+X(UI_MESSAGE_FG,           255, 255, 255, "Message bar text")
+X(UI_CURSOR,                50,  45,  45, "Cursor")
+X(UI_TILDE,                210, 205, 195, "Empty line tilde")
+X(UI_BRACKET_MATCH,        150,  90,  80, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      180,  70,  70, "Unmatched bracket")

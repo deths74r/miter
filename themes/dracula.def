@@ -1,0 +1,30 @@
+/* @name: Dracula */
+/* Popular dark theme with purple accents */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           248, 248, 242, "Normal text")
+X(SYNTAX_COMMENT,           98, 114, 164, "Comments")
+X(SYNTAX_KEYWORD1,         255, 121, 198, "Keywords - pink")
+X(SYNTAX_KEYWORD2,         139, 233, 253, "Type keywords - cyan")
+X(SYNTAX_STRING,           241, 250, 140, "Strings - yellow")
+X(SYNTAX_NUMBER,           189, 147, 249, "Numbers - purple")
+X(SYNTAX_MATCH,            255, 184, 108, "Search match - orange")
+
+/* UI elements */
+X(UI_BACKGROUND,            40,  42,  54, "Background")
+X(UI_FOREGROUND,           248, 248, 242, "Foreground")
+X(UI_LINE_NUMBER,           98, 114, 164, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  248, 248, 242, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    255, 184, 108, "Dirty line number")
+X(UI_LINE_NUMBER_BG,        30,  31,  41, "Line number gutter")
+X(UI_CURRENT_LINE,          68,  71,  90, "Current line highlight")
+X(UI_SELECTION_BG,         189, 147, 249, "Selection background")
+X(UI_SELECTION_FG,          40,  42,  54, "Selection text")
+X(UI_STATUS_BG,            189, 147, 249, "Status bar background")
+X(UI_STATUS_FG,             40,  42,  54, "Status bar text")
+X(UI_MESSAGE_BG,           255, 184, 108, "Message bar background")
+X(UI_MESSAGE_FG,            40,  42,  54, "Message bar text")
+X(UI_CURSOR,               248, 248, 242, "Cursor")
+X(UI_TILDE,                 68,  71,  90, "Empty line tilde")
+X(UI_BRACKET_MATCH,        255, 121, 198, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255, 121, 198, "Unmatched bracket")

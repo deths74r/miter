@@ -1,0 +1,30 @@
+/* @name: Twilight */
+/* Dusk-inspired purple-orange theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           220, 210, 220, "Normal text")
+X(SYNTAX_COMMENT,          110, 100, 120, "Comments")
+X(SYNTAX_KEYWORD1,         200, 130, 180, "Keywords - magenta")
+X(SYNTAX_KEYWORD2,         255, 180, 130, "Type keywords - sunset orange")
+X(SYNTAX_STRING,           180, 200, 255, "Strings - sky blue")
+X(SYNTAX_NUMBER,           255, 200, 160, "Numbers - peach")
+X(SYNTAX_MATCH,            255, 230, 150, "Search match")
+
+/* UI elements */
+X(UI_BACKGROUND,            28,  22,  32, "Background - dusk purple")
+X(UI_FOREGROUND,           220, 210, 220, "Foreground")
+X(UI_LINE_NUMBER,           90,  80, 100, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  160, 150, 170, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    255, 180, 130, "Dirty line number")
+X(UI_LINE_NUMBER_BG,        20,  16,  24, "Line number gutter")
+X(UI_CURRENT_LINE,          40,  32,  45, "Current line highlight")
+X(UI_SELECTION_BG,          70,  55,  80, "Selection background")
+X(UI_SELECTION_FG,         255, 255, 255, "Selection text")
+X(UI_STATUS_BG,            200, 130, 180, "Status bar background")
+X(UI_STATUS_FG,             28,  22,  32, "Status bar text")
+X(UI_MESSAGE_BG,           255, 180, 130, "Message bar background")
+X(UI_MESSAGE_FG,            28,  22,  32, "Message bar text")
+X(UI_CURSOR,               200, 130, 180, "Cursor")
+X(UI_TILDE,                 55,  45,  60, "Empty line tilde")
+X(UI_BRACKET_MATCH,        200, 130, 180, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255, 100, 100, "Unmatched bracket")

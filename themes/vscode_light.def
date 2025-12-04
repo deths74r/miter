@@ -1,0 +1,30 @@
+/* @name: VS Code Light */
+/* Visual Studio Code light theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,            38,  38,  38, "Normal text")
+X(SYNTAX_COMMENT,            0, 128,   0, "Comments - green")
+X(SYNTAX_KEYWORD1,           0,   0, 255, "Keywords - blue")
+X(SYNTAX_KEYWORD2,          38, 127, 153, "Type keywords - teal")
+X(SYNTAX_STRING,           163,  21,  21, "Strings - red")
+X(SYNTAX_NUMBER,             9, 136,  90, "Numbers - green")
+X(SYNTAX_MATCH,            255, 255,   0, "Search match - yellow")
+
+/* UI elements */
+X(UI_BACKGROUND,           255, 255, 255, "Background")
+X(UI_FOREGROUND,            38,  38,  38, "Foreground")
+X(UI_LINE_NUMBER,          175, 175, 175, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,   38,  38,  38, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    163,  21,  21, "Dirty line number")
+X(UI_LINE_NUMBER_BG,       255, 255, 255, "Line number gutter")
+X(UI_CURRENT_LINE,         255, 255, 204, "Current line highlight")
+X(UI_SELECTION_BG,         173, 214, 255, "Selection background")
+X(UI_SELECTION_FG,          38,  38,  38, "Selection text")
+X(UI_STATUS_BG,              0, 122, 204, "Status bar background")
+X(UI_STATUS_FG,            255, 255, 255, "Status bar text")
+X(UI_MESSAGE_BG,           230, 230, 230, "Message bar background")
+X(UI_MESSAGE_FG,            38,  38,  38, "Message bar text")
+X(UI_CURSOR,                38,  38,  38, "Cursor")
+X(UI_TILDE,                175, 175, 175, "Empty line tilde")
+X(UI_BRACKET_MATCH,        255, 255,   0, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255,   0,   0, "Unmatched bracket")

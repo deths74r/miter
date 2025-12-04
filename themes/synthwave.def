@@ -1,0 +1,30 @@
+/* @name: Synthwave */
+/* 80s retrowave aesthetic */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           255, 230, 255, "Normal text")
+X(SYNTAX_COMMENT,          100,  80, 120, "Comments")
+X(SYNTAX_KEYWORD1,         255, 100, 200, "Keywords - hot pink")
+X(SYNTAX_KEYWORD2,         100, 200, 255, "Type keywords - cyan")
+X(SYNTAX_STRING,           255, 200, 100, "Strings - gold")
+X(SYNTAX_NUMBER,           200, 150, 255, "Numbers - purple")
+X(SYNTAX_MATCH,            255, 255, 100, "Search match")
+
+/* UI elements */
+X(UI_BACKGROUND,            20,  10,  35, "Background - deep purple")
+X(UI_FOREGROUND,           255, 230, 255, "Foreground")
+X(UI_LINE_NUMBER,           90,  70, 110, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  180, 160, 200, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    255, 180, 100, "Dirty line number")
+X(UI_LINE_NUMBER_BG,        15,   5,  28, "Line number gutter")
+X(UI_CURRENT_LINE,          35,  20,  55, "Current line highlight")
+X(UI_SELECTION_BG,         255, 100, 200, "Selection background")
+X(UI_SELECTION_FG,          20,  10,  35, "Selection text")
+X(UI_STATUS_BG,            255, 100, 200, "Status bar background")
+X(UI_STATUS_FG,             20,  10,  35, "Status bar text")
+X(UI_MESSAGE_BG,           100, 200, 255, "Message bar background")
+X(UI_MESSAGE_FG,            20,  10,  35, "Message bar text")
+X(UI_CURSOR,               255, 100, 200, "Cursor")
+X(UI_TILDE,                 55,  40,  75, "Empty line tilde")
+X(UI_BRACKET_MATCH,        255, 100, 200, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255, 100, 100, "Unmatched bracket")

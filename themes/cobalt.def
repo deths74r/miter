@@ -1,0 +1,30 @@
+/* @name: Cobalt */
+/* Bright cobalt blue dark theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           255, 255, 255, "Normal text - white")
+X(SYNTAX_COMMENT,           80, 120, 180, "Comments - light cobalt")
+X(SYNTAX_KEYWORD1,         255, 180,   0, "Keywords - orange")
+X(SYNTAX_KEYWORD2,         255, 100, 200, "Type keywords - pink")
+X(SYNTAX_STRING,           100, 255, 100, "Strings - bright green")
+X(SYNTAX_NUMBER,           255, 100, 100, "Numbers - red")
+X(SYNTAX_MATCH,            255, 255, 100, "Search match - yellow")
+
+/* UI elements */
+X(UI_BACKGROUND,             0,  40,  80, "Background - cobalt")
+X(UI_FOREGROUND,           255, 255, 255, "Foreground")
+X(UI_LINE_NUMBER,           60, 100, 150, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  150, 190, 240, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    255, 180, 100, "Dirty line number")
+X(UI_LINE_NUMBER_BG,         0,  30,  60, "Line number gutter")
+X(UI_CURRENT_LINE,          10,  55, 100, "Current line highlight")
+X(UI_SELECTION_BG,          40,  90, 150, "Selection background")
+X(UI_SELECTION_FG,         255, 255, 255, "Selection text")
+X(UI_STATUS_BG,            255, 180,   0, "Status bar background")
+X(UI_STATUS_FG,              0,  40,  80, "Status bar text")
+X(UI_MESSAGE_BG,           100, 255, 100, "Message bar background")
+X(UI_MESSAGE_FG,             0,  40,  80, "Message bar text")
+X(UI_CURSOR,               255, 255, 255, "Cursor")
+X(UI_TILDE,                 40,  80, 130, "Empty line tilde")
+X(UI_BRACKET_MATCH,        255, 180,   0, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255, 100, 100, "Unmatched bracket")

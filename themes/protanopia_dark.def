@@ -1,0 +1,30 @@
+/* @name: Protanopia Dark */
+/* Red-blind friendly dark theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           220, 220, 255, "Normal text")
+X(SYNTAX_COMMENT,          120, 140, 180, "Comments")
+X(SYNTAX_KEYWORD1,         100, 200, 255, "Keywords - cyan")
+X(SYNTAX_KEYWORD2,         150, 180, 255, "Type keywords - blue")
+X(SYNTAX_STRING,           255, 220, 100, "Strings - gold")
+X(SYNTAX_NUMBER,           255, 255, 150, "Numbers - yellow")
+X(SYNTAX_MATCH,            255, 200,   0, "Search match - bright yellow")
+
+/* UI elements */
+X(UI_BACKGROUND,            15,  20,  30, "Background")
+X(UI_FOREGROUND,           220, 220, 255, "Foreground")
+X(UI_LINE_NUMBER,           80, 100, 140, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  150, 200, 255, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    255, 200,  80, "Dirty line number")
+X(UI_LINE_NUMBER_BG,        10,  15,  25, "Line number gutter")
+X(UI_CURRENT_LINE,          25,  35,  50, "Current line highlight")
+X(UI_SELECTION_BG,          60,  80, 120, "Selection background")
+X(UI_SELECTION_FG,         255, 255, 255, "Selection text")
+X(UI_STATUS_BG,            100, 200, 255, "Status bar background")
+X(UI_STATUS_FG,             15,  20,  30, "Status bar text")
+X(UI_MESSAGE_BG,           255, 220, 100, "Message bar background")
+X(UI_MESSAGE_FG,            15,  20,  30, "Message bar text")
+X(UI_CURSOR,               100, 200, 255, "Cursor")
+X(UI_TILDE,                 60,  70,  90, "Empty line tilde")
+X(UI_BRACKET_MATCH,        255, 220, 100, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255, 150, 100, "Unmatched bracket")

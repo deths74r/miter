@@ -1,0 +1,30 @@
+/* @name: Lavender */
+/* Soft purple light theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,            45,  40,  55, "Normal text")
+X(SYNTAX_COMMENT,          140, 135, 155, "Comments")
+X(SYNTAX_KEYWORD1,         120,  80, 160, "Keywords - purple")
+X(SYNTAX_KEYWORD2,          80, 120, 180, "Type keywords - blue")
+X(SYNTAX_STRING,           100, 140,  90, "Strings - green")
+X(SYNTAX_NUMBER,           170, 100, 130, "Numbers - mauve")
+X(SYNTAX_MATCH,            230, 220, 255, "Search match")
+
+/* UI elements */
+X(UI_BACKGROUND,           252, 250, 255, "Background - lavender")
+X(UI_FOREGROUND,            45,  40,  55, "Foreground")
+X(UI_LINE_NUMBER,          180, 175, 195, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,   95,  90, 110, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    180, 140, 100, "Dirty line number")
+X(UI_LINE_NUMBER_BG,       245, 242, 252, "Line number gutter")
+X(UI_CURRENT_LINE,         246, 244, 254, "Current line highlight")
+X(UI_SELECTION_BG,         210, 200, 240, "Selection background")
+X(UI_SELECTION_FG,          45,  40,  55, "Selection text")
+X(UI_STATUS_BG,            120,  80, 160, "Status bar background")
+X(UI_STATUS_FG,            255, 255, 255, "Status bar text")
+X(UI_MESSAGE_BG,            80, 120, 180, "Message bar background")
+X(UI_MESSAGE_FG,           255, 255, 255, "Message bar text")
+X(UI_CURSOR,                45,  40,  55, "Cursor")
+X(UI_TILDE,                205, 200, 220, "Empty line tilde")
+X(UI_BRACKET_MATCH,        120,  80, 160, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      180,  80,  80, "Unmatched bracket")

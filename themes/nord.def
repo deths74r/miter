@@ -1,0 +1,30 @@
+/* @name: Nord */
+/* Arctic, north-bluish clean theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           216, 222, 233, "Normal text - snow storm")
+X(SYNTAX_COMMENT,          107, 112, 137, "Comments - polar night")
+X(SYNTAX_KEYWORD1,         129, 161, 193, "Keywords - frost blue")
+X(SYNTAX_KEYWORD2,         136, 192, 208, "Type keywords - frost cyan")
+X(SYNTAX_STRING,           163, 190, 140, "Strings - aurora green")
+X(SYNTAX_NUMBER,           180, 142, 173, "Numbers - aurora purple")
+X(SYNTAX_MATCH,            235, 203, 139, "Search match - aurora yellow")
+
+/* UI elements */
+X(UI_BACKGROUND,            46,  52,  64, "Background - polar night")
+X(UI_FOREGROUND,           216, 222, 233, "Foreground - snow storm")
+X(UI_LINE_NUMBER,           76,  86, 106, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  143, 188, 187, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    208, 135, 112, "Dirty line number")
+X(UI_LINE_NUMBER_BG,        59,  66,  82, "Line number gutter")
+X(UI_CURRENT_LINE,          59,  66,  82, "Current line highlight")
+X(UI_SELECTION_BG,          67,  76,  94, "Selection background")
+X(UI_SELECTION_FG,         236, 239, 244, "Selection text")
+X(UI_STATUS_BG,             76,  86, 106, "Status bar background")
+X(UI_STATUS_FG,            236, 239, 244, "Status bar text")
+X(UI_MESSAGE_BG,           129, 161, 193, "Message bar background")
+X(UI_MESSAGE_FG,            46,  52,  64, "Message bar text")
+X(UI_CURSOR,               216, 222, 233, "Cursor")
+X(UI_TILDE,                 76,  86, 106, "Empty line tilde")
+X(UI_BRACKET_MATCH,        136, 192, 208, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      191,  97, 106, "Unmatched bracket")

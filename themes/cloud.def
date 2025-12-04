@@ -1,0 +1,30 @@
+/* @name: Cloud */
+/* Soft gray-white theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,            40,  45,  50, "Normal text")
+X(SYNTAX_COMMENT,          140, 145, 155, "Comments")
+X(SYNTAX_KEYWORD1,          80, 120, 180, "Keywords - blue")
+X(SYNTAX_KEYWORD2,         140, 100, 160, "Type keywords - purple")
+X(SYNTAX_STRING,            80, 140, 100, "Strings - green")
+X(SYNTAX_NUMBER,           170, 110, 100, "Numbers - terracotta")
+X(SYNTAX_MATCH,            255, 245, 200, "Search match")
+
+/* UI elements */
+X(UI_BACKGROUND,           250, 252, 254, "Background - cloud")
+X(UI_FOREGROUND,            40,  45,  50, "Foreground")
+X(UI_LINE_NUMBER,          175, 180, 190, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,   90,  95, 105, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    200, 150, 100, "Dirty line number")
+X(UI_LINE_NUMBER_BG,       244, 246, 248, "Line number gutter")
+X(UI_CURRENT_LINE,         244, 247, 250, "Current line highlight")
+X(UI_SELECTION_BG,         200, 220, 245, "Selection background")
+X(UI_SELECTION_FG,          40,  45,  50, "Selection text")
+X(UI_STATUS_BG,             80, 120, 180, "Status bar background")
+X(UI_STATUS_FG,            255, 255, 255, "Status bar text")
+X(UI_MESSAGE_BG,           140, 100, 160, "Message bar background")
+X(UI_MESSAGE_FG,           255, 255, 255, "Message bar text")
+X(UI_CURSOR,                40,  45,  50, "Cursor")
+X(UI_TILDE,                200, 205, 215, "Empty line tilde")
+X(UI_BRACKET_MATCH,         80, 120, 180, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      200,  80,  80, "Unmatched bracket")

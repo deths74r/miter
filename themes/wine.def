@@ -1,0 +1,30 @@
+/* @name: Wine */
+/* Deep burgundy dark theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,           225, 215, 220, "Normal text")
+X(SYNTAX_COMMENT,          115, 100, 110, "Comments")
+X(SYNTAX_KEYWORD1,         200, 100, 130, "Keywords - wine red")
+X(SYNTAX_KEYWORD2,         220, 150, 170, "Type keywords - rose")
+X(SYNTAX_STRING,           180, 200, 170, "Strings - sage")
+X(SYNTAX_NUMBER,           220, 180, 160, "Numbers - blush")
+X(SYNTAX_MATCH,            255, 220, 180, "Search match")
+
+/* UI elements */
+X(UI_BACKGROUND,            30,  20,  25, "Background - dark wine")
+X(UI_FOREGROUND,           225, 215, 220, "Foreground")
+X(UI_LINE_NUMBER,           95,  80,  88, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,  170, 155, 162, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    220, 160, 130, "Dirty line number")
+X(UI_LINE_NUMBER_BG,        22,  14,  18, "Line number gutter")
+X(UI_CURRENT_LINE,          45,  32,  38, "Current line highlight")
+X(UI_SELECTION_BG,          75,  50,  60, "Selection background")
+X(UI_SELECTION_FG,         255, 255, 255, "Selection text")
+X(UI_STATUS_BG,            200, 100, 130, "Status bar background")
+X(UI_STATUS_FG,            255, 255, 255, "Status bar text")
+X(UI_MESSAGE_BG,           220, 150, 170, "Message bar background")
+X(UI_MESSAGE_FG,            30,  20,  25, "Message bar text")
+X(UI_CURSOR,               200, 100, 130, "Cursor")
+X(UI_TILDE,                 60,  48,  54, "Empty line tilde")
+X(UI_BRACKET_MATCH,        200, 100, 130, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      255, 100, 100, "Unmatched bracket")

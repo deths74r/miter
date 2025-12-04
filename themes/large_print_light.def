@@ -1,0 +1,30 @@
+/* @name: Large Print Light */
+/* High visibility light theme */
+
+/* Syntax highlighting */
+X(SYNTAX_NORMAL,             0,   0,   0, "Normal text")
+X(SYNTAX_COMMENT,           80, 120,  80, "Comments - green")
+X(SYNTAX_KEYWORD1,         160,  80,   0, "Keywords - orange")
+X(SYNTAX_KEYWORD2,           0,  80, 160, "Type keywords - blue")
+X(SYNTAX_STRING,           180,  40,  40, "Strings - red")
+X(SYNTAX_NUMBER,            40, 140,  40, "Numbers - green")
+X(SYNTAX_MATCH,            255, 255,   0, "Search match - yellow")
+
+/* UI elements */
+X(UI_BACKGROUND,           255, 255, 255, "Background")
+X(UI_FOREGROUND,             0,   0,   0, "Foreground")
+X(UI_LINE_NUMBER,          120, 120, 120, "Line numbers")
+X(UI_LINE_NUMBER_CURRENT,    0,   0,   0, "Current line number")
+X(UI_LINE_NUMBER_DIRTY,    160,  80,   0, "Dirty line number")
+X(UI_LINE_NUMBER_BG,       255, 255, 255, "Line number gutter")
+X(UI_CURRENT_LINE,         240, 240, 240, "Current line highlight")
+X(UI_SELECTION_BG,         180, 180, 180, "Selection background")
+X(UI_SELECTION_FG,           0,   0,   0, "Selection text")
+X(UI_STATUS_BG,            160,  80,   0, "Status bar background")
+X(UI_STATUS_FG,            255, 255, 255, "Status bar text")
+X(UI_MESSAGE_BG,             0,  80, 160, "Message bar background")
+X(UI_MESSAGE_FG,           255, 255, 255, "Message bar text")
+X(UI_CURSOR,                 0,   0,   0, "Cursor")
+X(UI_TILDE,                180, 180, 180, "Empty line tilde")
+X(UI_BRACKET_MATCH,        160,  80,   0, "Matched bracket")
+X(UI_BRACKET_UNMATCH,      180,  40,  40, "Unmatched bracket")
