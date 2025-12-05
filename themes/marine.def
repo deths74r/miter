@@ -1,0 +1,27 @@
+/* @name: Marine */
+/* Colorblind safe theme */
+
+background = #0f1c2e
+foreground = #c7d5e0
+comment = #5e7a8a
+keyword1 = #4d9de0
+keyword2 = #7ec8e3
+string = #f4d35e
+number = #3bceac
+match = #ee6c4d
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #4d9de0
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #c7d5e0
+tilde = #303040
+bracket_match = #3bceac
+bracket_unmatch = #ee6c4d

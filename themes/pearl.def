@@ -1,30 +1,27 @@
 /* @name: Pearl */
-/* Lustrous off-white theme */
+/* Colorblind safe light theme */
 
-/* Syntax highlighting */
-X(SYNTAX_NORMAL,            45,  45,  50, "Normal text")
-X(SYNTAX_COMMENT,          145, 145, 155, "Comments")
-X(SYNTAX_KEYWORD1,         100,  90, 160, "Keywords - amethyst")
-X(SYNTAX_KEYWORD2,          85, 130, 170, "Type keywords - sapphire")
-X(SYNTAX_STRING,           100, 140,  95, "Strings - jade")
-X(SYNTAX_NUMBER,           160, 105, 115, "Numbers - coral")
-X(SYNTAX_MATCH,            240, 235, 255, "Search match")
+background = #f8f9fa
+foreground = #212529
+comment = #6c757d
+keyword1 = #0d6efd
+keyword2 = #6ea8fe
+string = #fd7e14
+number = #20c997
+match = #dc3545
 
-/* UI elements */
-X(UI_BACKGROUND,           252, 252, 255, "Background - pearl")
-X(UI_FOREGROUND,            45,  45,  50, "Foreground")
-X(UI_LINE_NUMBER,          185, 185, 195, "Line numbers")
-X(UI_LINE_NUMBER_CURRENT,   95,  95, 105, "Current line number")
-X(UI_LINE_NUMBER_DIRTY,    190, 150, 110, "Dirty line number")
-X(UI_LINE_NUMBER_BG,       246, 246, 250, "Line number gutter")
-X(UI_CURRENT_LINE,         248, 248, 254, "Current line highlight")
-X(UI_SELECTION_BG,         215, 215, 240, "Selection background")
-X(UI_SELECTION_FG,          45,  45,  50, "Selection text")
-X(UI_STATUS_BG,            100,  90, 160, "Status bar background")
-X(UI_STATUS_FG,            255, 255, 255, "Status bar text")
-X(UI_MESSAGE_BG,            85, 130, 170, "Message bar background")
-X(UI_MESSAGE_FG,           255, 255, 255, "Message bar text")
-X(UI_CURSOR,                45,  45,  50, "Cursor")
-X(UI_TILDE,                210, 210, 220, "Empty line tilde")
-X(UI_BRACKET_MATCH,        100,  90, 160, "Matched bracket")
-X(UI_BRACKET_UNMATCH,      180,  80,  80, "Unmatched bracket")
+line_number = #909098
+line_number_current = #303038
+line_number_dirty = #685820
+line_number_bg = #f0f0f4
+current_line = #e8e8f0
+selection_bg = #6ea8fe
+selection_fg = #ffffff
+status_bg = #d8d8dc
+status_fg = #505058
+message_bg = #ececf0
+message_fg = #505058
+cursor = #212529
+tilde = #c0c0c8
+bracket_match = #20c997
+bracket_unmatch = #dc3545

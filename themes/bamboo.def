@@ -1,0 +1,27 @@
+/* @name: Bamboo */
+/* Colorblind safe light theme */
+
+background = #f0f0e0
+foreground = #333330
+comment = #666660
+keyword1 = #004466
+keyword2 = #006688
+string = #aa7700
+number = #007766
+match = #993333
+
+line_number = #909098
+line_number_current = #303038
+line_number_dirty = #685820
+line_number_bg = #f0f0f4
+current_line = #e8e8f0
+selection_bg = #006688
+selection_fg = #ffffff
+status_bg = #d8d8dc
+status_fg = #505058
+message_bg = #ececf0
+message_fg = #505058
+cursor = #333330
+tilde = #c0c0c8
+bracket_match = #007766
+bracket_unmatch = #993333

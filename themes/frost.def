@@ -1,0 +1,27 @@
+/* @name: Frost */
+/* Colorblind safe theme */
+
+background = #181c22
+foreground = #e0e8f0
+comment = #607080
+keyword1 = #70a8d0
+keyword2 = #90c0e0
+string = #d8d080
+number = #60c0b0
+match = #e0a060
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #70a8d0
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #e0e8f0
+tilde = #303040
+bracket_match = #60c0b0
+bracket_unmatch = #e0a060

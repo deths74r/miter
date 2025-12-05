@@ -1,0 +1,27 @@
+/* @name: Blush */
+/* Colorblind safe light theme */
+
+background = #fff5f5
+foreground = #1a1a2e
+comment = #708090
+keyword1 = #4169e1
+keyword2 = #6495ed
+string = #daa520
+number = #20b2aa
+match = #cd5c5c
+
+line_number = #909098
+line_number_current = #303038
+line_number_dirty = #685820
+line_number_bg = #f0f0f4
+current_line = #e8e8f0
+selection_bg = #6495ed
+selection_fg = #ffffff
+status_bg = #d8d8dc
+status_fg = #505058
+message_bg = #ececf0
+message_fg = #505058
+cursor = #1a1a2e
+tilde = #c0c0c8
+bracket_match = #20b2aa
+bracket_unmatch = #cd5c5c

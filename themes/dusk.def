@@ -1,0 +1,27 @@
+/* @name: Dusk */
+/* Colorblind safe theme */
+
+background = #1a1820
+foreground = #e0dce8
+comment = #6a6078
+keyword1 = #9080b0
+keyword2 = #a898c8
+string = #d8c078
+number = #70a8a0
+match = #c87878
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #9080b0
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #e0dce8
+tilde = #303040
+bracket_match = #70a8a0
+bracket_unmatch = #c87878

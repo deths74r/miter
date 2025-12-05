@@ -1,0 +1,27 @@
+/* @name: Mercury */
+/* Colorblind safe theme */
+
+background = #1a1d21
+foreground = #ced4da
+comment = #6c757d
+keyword1 = #69b3e7
+keyword2 = #9dc8e8
+string = #ffc107
+number = #20c997
+match = #ff7043
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #69b3e7
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #ced4da
+tilde = #303040
+bracket_match = #20c997
+bracket_unmatch = #ff7043

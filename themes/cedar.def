@@ -1,0 +1,27 @@
+/* @name: Cedar */
+/* Colorblind safe theme */
+
+background = #1c1816
+foreground = #e0d8d0
+comment = #7a6a5a
+keyword1 = #b08050
+keyword2 = #c89868
+string = #d8b870
+number = #90a878
+match = #d89058
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #b08050
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #e0d8d0
+tilde = #303040
+bracket_match = #90a878
+bracket_unmatch = #d89058

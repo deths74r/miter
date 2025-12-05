@@ -1,0 +1,27 @@
+/* @name: Coral */
+/* Colorblind safe theme */
+
+background = #1c1618
+foreground = #f0e8e0
+comment = #8a7068
+keyword1 = #d07050
+keyword2 = #e08868
+string = #e8c070
+number = #70b0a0
+match = #e08050
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #d07050
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #f0e8e0
+tilde = #303040
+bracket_match = #70b0a0
+bracket_unmatch = #e08050

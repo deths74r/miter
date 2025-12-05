@@ -1,0 +1,27 @@
+/* @name: Eclipse */
+/* Eclipse dark theme - colorblind safe */
+
+background = #1e1e1e
+foreground = #d4d4d4
+comment = #608b4e
+keyword1 = #569cd6
+keyword2 = #4ec9b0
+string = #d69d85
+number = #b5cea8
+match = #dcdcaa
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #282828
+selection_bg = #264f78
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #d4d4d4
+tilde = #282828
+bracket_match = #4ec9b0
+bracket_unmatch = #d69d85

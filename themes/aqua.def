@@ -1,0 +1,27 @@
+/* @name: Aqua */
+/* Colorblind safe theme */
+
+background = #101c20
+foreground = #d8e8f0
+comment = #507880
+keyword1 = #40a0b8
+keyword2 = #60b8d0
+string = #d8c870
+number = #50c0a0
+match = #e0a050
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #40a0b8
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #d8e8f0
+tilde = #303040
+bracket_match = #50c0a0
+bracket_unmatch = #e0a050

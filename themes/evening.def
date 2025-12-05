@@ -1,0 +1,27 @@
+/* @name: Evening */
+/* Colorblind safe light theme */
+
+background = #faf5ff
+foreground = #1e1b4b
+comment = #6366f1
+keyword1 = #4f46e5
+keyword2 = #6366f1
+string = #ca8a04
+number = #0891b2
+match = #dc2626
+
+line_number = #909098
+line_number_current = #303038
+line_number_dirty = #685820
+line_number_bg = #f0f0f4
+current_line = #e8e8f0
+selection_bg = #6366f1
+selection_fg = #ffffff
+status_bg = #d8d8dc
+status_fg = #505058
+message_bg = #ececf0
+message_fg = #505058
+cursor = #1e1b4b
+tilde = #c0c0c8
+bracket_match = #0891b2
+bracket_unmatch = #dc2626

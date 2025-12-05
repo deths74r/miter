@@ -1,0 +1,27 @@
+/* @name: Indigo */
+/* Colorblind safe theme */
+
+background = #14142a
+foreground = #e0e0f0
+comment = #5a5a8a
+keyword1 = #7b68ee
+keyword2 = #9a8bef
+string = #f0d070
+number = #5fd3bc
+match = #ff7b7b
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #7b68ee
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #e0e0f0
+tilde = #303040
+bracket_match = #5fd3bc
+bracket_unmatch = #ff7b7b

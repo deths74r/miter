@@ -1,30 +1,27 @@
 /* @name: Arctic */
-/* Cold blue-white dark theme */
+/* Cool arctic theme - colorblind safe */
 
-/* Syntax highlighting */
-X(SYNTAX_NORMAL,           210, 220, 235, "Normal text - ice")
-X(SYNTAX_COMMENT,           90, 105, 130, "Comments - frost")
-X(SYNTAX_KEYWORD1,         130, 180, 240, "Keywords - glacier blue")
-X(SYNTAX_KEYWORD2,         180, 210, 255, "Type keywords - ice blue")
-X(SYNTAX_STRING,           160, 220, 200, "Strings - aurora green")
-X(SYNTAX_NUMBER,           200, 180, 220, "Numbers - pale violet")
-X(SYNTAX_MATCH,            255, 240, 180, "Search match")
+background = #1a1d23
+foreground = #d4d4d8
+comment = #6b7280
+keyword1 = #6366f1
+keyword2 = #818cf8
+string = #fbbf24
+number = #22d3ee
+match = #fb7185
 
-/* UI elements */
-X(UI_BACKGROUND,            15,  22,  35, "Background - polar night")
-X(UI_FOREGROUND,           210, 220, 235, "Foreground")
-X(UI_LINE_NUMBER,           70,  85, 110, "Line numbers")
-X(UI_LINE_NUMBER_CURRENT,  140, 160, 190, "Current line number")
-X(UI_LINE_NUMBER_DIRTY,    220, 180, 130, "Dirty line number")
-X(UI_LINE_NUMBER_BG,        10,  16,  26, "Line number gutter")
-X(UI_CURRENT_LINE,          25,  35,  52, "Current line highlight")
-X(UI_SELECTION_BG,          50,  70, 100, "Selection background")
-X(UI_SELECTION_FG,         255, 255, 255, "Selection text")
-X(UI_STATUS_BG,            130, 180, 240, "Status bar background")
-X(UI_STATUS_FG,             15,  22,  35, "Status bar text")
-X(UI_MESSAGE_BG,           160, 220, 200, "Message bar background")
-X(UI_MESSAGE_FG,            15,  22,  35, "Message bar text")
-X(UI_CURSOR,               210, 220, 235, "Cursor")
-X(UI_TILDE,                 45,  58,  80, "Empty line tilde")
-X(UI_BRACKET_MATCH,        130, 180, 240, "Matched bracket")
-X(UI_BRACKET_UNMATCH,      240, 120, 120, "Unmatched bracket")
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252830
+selection_bg = #4f46e5
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #d4d4d8
+tilde = #252830
+bracket_match = #22d3ee
+bracket_unmatch = #fb7185

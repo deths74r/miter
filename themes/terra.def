@@ -1,0 +1,27 @@
+/* @name: Terra */
+/* Colorblind safe theme */
+
+background = #1a1614
+foreground = #e8dcd0
+comment = #7a6858
+keyword1 = #c07840
+keyword2 = #d09058
+string = #d8b060
+number = #80a070
+match = #d08848
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #c07840
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #e8dcd0
+tilde = #303040
+bracket_match = #80a070
+bracket_unmatch = #d08848

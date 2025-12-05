@@ -1,0 +1,27 @@
+/* @name: Ocean Deep */
+/* Deep blue dark theme - colorblind safe */
+
+background = #0a1929
+foreground = #e3f2fd
+comment = #5c7a99
+keyword1 = #64b5f6
+keyword2 = #81d4fa
+string = #ffb74d
+number = #4dd0e1
+match = #ff8a65
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #0d2137
+selection_bg = #1565c0
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #e3f2fd
+tilde = #263238
+bracket_match = #4dd0e1
+bracket_unmatch = #ff8a65

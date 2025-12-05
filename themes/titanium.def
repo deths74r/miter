@@ -1,0 +1,27 @@
+/* @name: Titanium */
+/* Colorblind safe theme */
+
+background = #16191d
+foreground = #dde4eb
+comment = #636d7c
+keyword1 = #5bc0eb
+keyword2 = #9ad4e8
+string = #fde74c
+number = #5efc82
+match = #f7567c
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #5bc0eb
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #dde4eb
+tilde = #303040
+bracket_match = #5efc82
+bracket_unmatch = #f7567c

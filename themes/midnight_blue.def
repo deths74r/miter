@@ -1,0 +1,27 @@
+/* @name: Midnight Blue */
+/* Classic midnight blue theme - colorblind safe */
+
+background = #0d1b2a
+foreground = #e0e1dd
+comment = #778da9
+keyword1 = #00b4d8
+keyword2 = #90e0ef
+string = #ffd166
+number = #06d6a0
+match = #ef476f
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #1b263b
+selection_bg = #415a77
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #e0e1dd
+tilde = #1b263b
+bracket_match = #06d6a0
+bracket_unmatch = #ef476f

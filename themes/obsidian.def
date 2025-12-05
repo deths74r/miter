@@ -1,30 +1,27 @@
 /* @name: Obsidian */
-/* Dark volcanic glass theme */
+/* Dark obsidian theme - colorblind safe */
 
-/* Syntax highlighting */
-X(SYNTAX_NORMAL,           220, 220, 220, "Normal text")
-X(SYNTAX_COMMENT,          100, 100, 100, "Comments")
-X(SYNTAX_KEYWORD1,         255, 120,  80, "Keywords - orange")
-X(SYNTAX_KEYWORD2,         120, 200, 255, "Type keywords - cyan")
-X(SYNTAX_STRING,           160, 255, 160, "Strings - green")
-X(SYNTAX_NUMBER,           255, 200, 120, "Numbers - gold")
-X(SYNTAX_MATCH,            255, 255, 100, "Search match - yellow")
+background = #0f0f0f
+foreground = #d4d4d4
+comment = #6a9955
+keyword1 = #569cd6
+keyword2 = #4ec9b0
+string = #ce9178
+number = #b5cea8
+match = #dcdcaa
 
-/* UI elements */
-X(UI_BACKGROUND,            25,  25,  25, "Background")
-X(UI_FOREGROUND,           220, 220, 220, "Foreground")
-X(UI_LINE_NUMBER,           80,  80,  80, "Line numbers")
-X(UI_LINE_NUMBER_CURRENT,  180, 180, 180, "Current line number")
-X(UI_LINE_NUMBER_DIRTY,    255, 150,  80, "Dirty line number")
-X(UI_LINE_NUMBER_BG,        18,  18,  18, "Line number gutter")
-X(UI_CURRENT_LINE,          35,  35,  35, "Current line highlight")
-X(UI_SELECTION_BG,          70,  70,  70, "Selection background")
-X(UI_SELECTION_FG,         255, 255, 255, "Selection text")
-X(UI_STATUS_BG,             50,  50,  50, "Status bar background")
-X(UI_STATUS_FG,            220, 220, 220, "Status bar text")
-X(UI_MESSAGE_BG,           255, 120,  80, "Message bar background")
-X(UI_MESSAGE_FG,            25,  25,  25, "Message bar text")
-X(UI_CURSOR,               220, 220, 220, "Cursor")
-X(UI_TILDE,                 60,  60,  60, "Empty line tilde")
-X(UI_BRACKET_MATCH,        255, 120,  80, "Matched bracket")
-X(UI_BRACKET_UNMATCH,      255,  80,  80, "Unmatched bracket")
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #1a1a1a
+selection_bg = #264f78
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #d4d4d4
+tilde = #1a1a1a
+bracket_match = #4ec9b0
+bracket_unmatch = #ce9178

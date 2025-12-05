@@ -1,0 +1,27 @@
+/* @name: Midnight Ocean */
+/* Colorblind safe theme */
+
+background = #0a1628
+foreground = #d0e8f8
+comment = #4a6a8a
+keyword1 = #50a0e0
+keyword2 = #70b8f0
+string = #e8d070
+number = #50c8b0
+match = #e89050
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #152030
+selection_bg = #3070a0
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #d0e8f8
+tilde = #1a2838
+bracket_match = #50c8b0
+bracket_unmatch = #e89050

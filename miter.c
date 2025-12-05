@@ -173,6 +173,10 @@
 
 /* ASCII escape character value */
 #define CHAR_ESCAPE '\x1b'
+/* CSI (Control Sequence Introducer) second character */
+#define CHAR_CSI '['
+/* SS3 (Single Shift 3) second character - used for some function keys */
+#define CHAR_SS3 'O'
 
 /* Mouse tracking escape sequences */
 #define MOUSE_ENABLE_NORMAL "\x1b[?1000h"    /* Basic mouse reporting */
@@ -204,6 +208,33 @@
 #define ESCAPE_KITTY_CURSOR_CLEAR "\x1b[>0;4 q"
 #define ESCAPE_KITTY_CURSOR_CLEAR_LEN 8
 #define ESCAPE_KITTY_CURSOR_FORMAT "\x1b[>29;2:%d:%d q"
+
+/* Kitty keyboard protocol
+ * https://sw.kovidgoyal.net/kitty/keyboard-protocol/
+ * Flag 1 (0b1): Disambiguate escape codes
+ * Flag 2 (0b10): Report event types (press/repeat/release)
+ * Flag 4 (0b100): Report alternate keys
+ * Flag 8 (0b1000): Report all keys as escape codes
+ * Flag 16 (0b10000): Report associated text
+ * We use flag 1 for basic disambiguation, which solves ESC ambiguity
+ * and provides consistent modifier encoding.
+ */
+#define KITTY_KEYBOARD_ENABLE "\x1b[>1u"      /* Push flags=1 (disambiguate) */
+#define KITTY_KEYBOARD_ENABLE_LEN 5
+#define KITTY_KEYBOARD_DISABLE "\x1b[<u"      /* Pop from stack (restore) */
+#define KITTY_KEYBOARD_DISABLE_LEN 4
+#define KITTY_KEYBOARD_QUERY "\x1b[?u"        /* Query current flags */
+#define KITTY_KEYBOARD_QUERY_LEN 4
+
+/* Kitty keyboard modifier bits (reported as 1 + value in CSI sequence) */
+#define KITTY_MOD_SHIFT     1
+#define KITTY_MOD_ALT       2
+#define KITTY_MOD_CTRL      4
+#define KITTY_MOD_SUPER     8
+#define KITTY_MOD_HYPER     16
+#define KITTY_MOD_META      32
+#define KITTY_MOD_CAPS_LOCK 64
+#define KITTY_MOD_NUM_LOCK  128
 
 /* Convert keypress to Ctrl+key value by masking upper bits */
 #define CTRL_KEY(k) ((k) & CTRL_KEY_MASK)
@@ -586,121 +617,14 @@ struct editor_config {
   size_t cursor_capacity;       /* Allocated capacity of cursors array */
   int cursors_follow_primary;   /* 1 = secondary cursors follow movement */
   int allow_primary_overlap;    /* 1 = keep secondary cursor at primary position */
-  /* Menu bar state */
-  int menu_bar_visible;         /* 1 = show menu bar (default), 0 = hide */
-  int menu_open;                /* -1 = closed, 0+ = index of open menu */
-  int menu_selected_item;       /* Selected item within open dropdown */
+  /* Keyboard protocol state */
+  int kitty_keyboard_mode;      /* 1 = Kitty protocol active, 0 = legacy mode */
 };
 
 struct editor_config editor;
 
-/*** Menu bar definitions ***/
-
-/* Forward declarations for menu actions */
-void editor_open_file_browser(void);
-void editor_save(void);
-void editor_find(void);
+/* Forward declaration */
 void simple_search(const char *query);
-void editor_undo(void);
-void editor_redo(void);
-void editor_copy(void);
-void editor_cut(void);
-void editor_paste(void);
-void selection_select_all(void);
-void editor_toggle_line_numbers(void);
-void editor_toggle_soft_wrap(void);
-void editor_set_status_message(const char *fmt, ...);
-void editor_free_row(editor_row *row);
-void theme_cycle(void);
-
-/* Menu item structure */
-typedef struct {
-  const char *label;      /* Display text (NULL for separator) */
-  const char *shortcut;   /* Keyboard shortcut display, e.g., "Ctrl+S" */
-  void (*action)(void);   /* Function to call when selected */
-} menu_item;
-
-/* Menu definition structure */
-typedef struct {
-  const char *title;      /* Menu title: "File", "Edit", etc. */
-  menu_item *items;       /* Array of menu items */
-  int item_count;         /* Number of items */
-  int x_position;         /* Calculated screen position (set during render) */
-  int width;              /* Calculated dropdown width (set during render) */
-} menu_def;
-
-/* Menu action wrapper functions (to handle quit specially) */
-static int menu_quit_requested = 0;
-
-static void menu_action_new(void) {
-  /* Clear buffer for new file */
-  if (editor.dirty) {
-    editor_set_status_message("Save changes first (Ctrl+S) or quit without saving (Ctrl+Q 3x)");
-    return;
-  }
-  for (int i = 0; i < editor.row_count; i++) {
-    editor_free_row(&editor.row[i]);
-  }
-  free(editor.row);
-  editor.row = NULL;
-  editor.row_count = 0;
-  free(editor.filename);
-  editor.filename = NULL;
-  editor.dirty = 0;
-  editor.cursor_x = editor.cursor_y = 0;
-  editor.row_offset = editor.column_offset = 0;
-  editor_set_status_message("New file");
-}
-
-static void menu_action_quit(void) {
-  menu_quit_requested = 1;
-}
-
-static void menu_action_about(void) {
-  editor_set_status_message("Terra - SQLite-powered terminal text editor | github.com/deths74r/terra");
-}
-
-/* Menu item definitions */
-static menu_item file_menu_items[] = {
-  {"New",        "Ctrl+N", menu_action_new},
-  {"Open...",    "Ctrl+O", editor_open_file_browser},
-  {"Save",       "Ctrl+S", editor_save},
-  {NULL,         NULL,     NULL},  /* Separator */
-  {"Quit",       "Ctrl+Q", menu_action_quit}
-};
-
-static menu_item edit_menu_items[] = {
-  {"Undo",       "Ctrl+Z", editor_undo},
-  {"Redo",       "Ctrl+Y", editor_redo},
-  {NULL,         NULL,     NULL},  /* Separator */
-  {"Cut",        "Ctrl+X", editor_cut},
-  {"Copy",       "Ctrl+C", editor_copy},
-  {"Paste",      "Ctrl+V", editor_paste},
-  {NULL,         NULL,     NULL},
-  {"Select All", "Ctrl+A", selection_select_all},
-  {"Find...",    "Ctrl+F", editor_find}
-};
-
-static menu_item view_menu_items[] = {
-  {"Line Numbers", "Alt+L", editor_toggle_line_numbers},
-  {"Soft Wrap",    "Alt+W", editor_toggle_soft_wrap},
-  {NULL,           NULL,    NULL},
-  {"Next Theme",   "Alt+T", theme_cycle}
-};
-
-static menu_item help_menu_items[] = {
-  {"About Terra", NULL, menu_action_about}
-};
-
-static menu_def menus[] = {
-  /* title, items, item_count, x_position, width */
-  /* x_positions: " File " = 0, " Edit " = 6, " View " = 12, " Help " = 18 */
-  {"File", file_menu_items, 5, 0, 0},
-  {"Edit", edit_menu_items, 9, 6, 0},
-  {"View", view_menu_items, 4, 12, 0},
-  {"Help", help_menu_items, 1, 18, 0}
-};
-#define MENU_COUNT 4
 
 /* Flag for SIGWINCH signal (terminal resize) */
 volatile sig_atomic_t window_resize_pending = 0;
@@ -1038,11 +962,55 @@ void die(const char *message) {
 
 /* Restore terminal to canonical mode. Called via atexit(). */
 void disable_raw_mode() {
+  /* Disable Kitty keyboard protocol if it was enabled */
+  if (editor.kitty_keyboard_mode) {
+    write(STDOUT_FILENO, KITTY_KEYBOARD_DISABLE, KITTY_KEYBOARD_DISABLE_LEN);
+  }
   /* Disable mouse tracking before restoring terminal */
   write(STDOUT_FILENO, MOUSE_DISABLE_SGR, 8);
   write(STDOUT_FILENO, MOUSE_DISABLE_BUTTON, 8);
   if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &editor.original_termios) == -1)
     die("tcsetattr");
+}
+
+/* Try to detect Kitty keyboard protocol support.
+ * Sends query sequence and checks for valid response.
+ * Returns 1 if supported, 0 otherwise. */
+static int detect_kitty_keyboard_support() {
+  /* Send query: CSI ? u */
+  write(STDOUT_FILENO, KITTY_KEYBOARD_QUERY, KITTY_KEYBOARD_QUERY_LEN);
+
+  /* Use select() for short timeout to read response */
+  fd_set readfds;
+  struct timeval tv;
+  FD_ZERO(&readfds);
+  FD_SET(STDIN_FILENO, &readfds);
+  tv.tv_sec = 0;
+  tv.tv_usec = 100000;  /* 100ms timeout */
+
+  if (select(STDIN_FILENO + 1, &readfds, NULL, NULL, &tv) <= 0) {
+    return 0;  /* No response - not supported */
+  }
+
+  /* Read response: should be CSI ? flags u (e.g., "\x1b[?0u" or "\x1b[?1u") */
+  char buf[32];
+  int idx = 0;
+  char c;
+
+  while (idx < 31) {
+    if (read(STDIN_FILENO, &c, 1) != 1) break;
+    buf[idx++] = c;
+    if (c == 'u') break;  /* End of response */
+  }
+  buf[idx] = '\0';
+
+  /* Check for valid response format: ESC [ ? flags u */
+  /* Response is "\x1b[?Nu" where N is the current flags (typically 0) */
+  if (idx >= 4 && buf[0] == CHAR_ESCAPE && buf[1] == CHAR_CSI && buf[2] == '?') {
+    return 1;  /* Kitty protocol supported */
+  }
+
+  return 0;
 }
 
 /* Put terminal into raw mode for character-by-character input. */
@@ -1059,6 +1027,14 @@ void enable_raw_mode() {
   raw.c_cc[VTIME] = VTIME_DECISECONDS;
 
   if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1) die("tcsetattr");
+
+  /* Try to enable Kitty keyboard protocol */
+  if (detect_kitty_keyboard_support()) {
+    write(STDOUT_FILENO, KITTY_KEYBOARD_ENABLE, KITTY_KEYBOARD_ENABLE_LEN);
+    editor.kitty_keyboard_mode = 1;
+  } else {
+    editor.kitty_keyboard_mode = 0;
+  }
 
   /* Enable mouse tracking (SGR extended mode for large terminals) */
   /* Mode 1006: SGR format for coordinates (supports large terminals) */
@@ -1112,22 +1088,416 @@ int parse_sgr_mouse_event() {
 }
 
 /*
- * Read a single keypress and return its key code.
- * Handles escape sequences for special keys (arrows, function keys).
+ * Parse Kitty keyboard protocol CSI u sequence.
+ * Format: CSI unicode-key-code[:shifted-key[:base-key]] ; modifiers[:event-type] u
+ * Called after reading "ESC [" and some initial characters.
+ * The 'already_read' buffer contains characters already read after '['.
+ * The 'already_len' is how many characters are in already_read.
+ * Returns the appropriate key code.
+ */
+int parse_kitty_key_event(const char *already_read, int already_len) {
+  char buffer[64];
+  int idx = 0;
+
+  /* Copy already read characters */
+  for (int i = 0; i < already_len && idx < 63; i++) {
+    buffer[idx++] = already_read[i];
+  }
+
+  /* Check if we already have the terminator */
+  int have_terminator = (already_len > 0 && already_read[already_len - 1] == 'u');
+
+  /* Read until 'u' terminator if not already present */
+  if (!have_terminator) {
+    char c;
+    while (idx < 63) {
+      if (read(STDIN_FILENO, &c, 1) != 1) return CHAR_ESCAPE;
+      buffer[idx++] = c;
+      if (c == 'u') break;
+    }
+  }
+  buffer[idx] = '\0';
+
+  /* Parse the sequence: keycode[;modifiers]u */
+  int keycode = 0;
+  int modifiers = 0;
+
+  /* Find semicolon separator */
+  char *semi = strchr(buffer, ';');
+  if (semi) {
+    *semi = '\0';
+    keycode = atoi(buffer);
+    /* Modifiers are reported as 1 + actual_value */
+    modifiers = atoi(semi + 1) - 1;
+    if (modifiers < 0) modifiers = 0;
+  } else {
+    /* No modifiers, just keycode followed by 'u' */
+    /* Find and remove 'u' */
+    char *u_pos = strchr(buffer, 'u');
+    if (u_pos) *u_pos = '\0';
+    keycode = atoi(buffer);
+  }
+
+  /* Extract modifier flags */
+  int shift = (modifiers & KITTY_MOD_SHIFT) != 0;
+  int alt = (modifiers & KITTY_MOD_ALT) != 0;
+  int ctrl = (modifiers & KITTY_MOD_CTRL) != 0;
+
+  /* Map special keycodes to editor keys */
+  /* Kitty uses Unicode code points for regular keys and special values for function keys */
+  /* Special keys: https://sw.kovidgoyal.net/kitty/keyboard-protocol/#functional-key-definitions */
+
+  /* Function keys and special keys have codes >= 57344 (Private Use Area) */
+  switch (keycode) {
+    /* Escape key */
+    case 27:
+      return CHAR_ESCAPE;
+
+    /* Enter/Return */
+    case 13:
+      return '\r';
+
+    /* Tab */
+    case 9:
+      if (shift) return SHIFT_TAB;
+      return '\t';
+
+    /* Backspace */
+    case 127:
+      if (ctrl) return CTRL_BACKSPACE;
+      return BACKSPACE;
+
+    /* Legacy functional keycodes (used with flags=1 CSI u format) */
+    case 1:  /* Home */
+      if (shift) return SHIFT_HOME;
+      return HOME_KEY;
+    case 3:  /* Delete */
+      if (ctrl) return CTRL_DELETE;
+      return DEL_KEY;
+    case 4:  /* End */
+      if (shift) return SHIFT_END;
+      return END_KEY;
+    case 5:  /* Page Up */
+      return PAGE_UP;
+    case 6:  /* Page Down */
+      return PAGE_DOWN;
+    case 7:  /* Home (alternate) */
+      return HOME_KEY;
+    case 8:  /* End (alternate) */
+      return END_KEY;
+
+    /* Arrow keys (Kitty special codes) */
+    case 57352:  /* Up */
+      if (shift && alt) return ALT_SHIFT_UP;
+      if (shift) return SHIFT_ARROW_UP;
+      if (alt) return ALT_UP;
+      return ARROW_UP;
+    case 57353:  /* Down */
+      if (shift && alt) return ALT_SHIFT_DOWN;
+      if (shift) return SHIFT_ARROW_DOWN;
+      if (alt) return ALT_DOWN;
+      return ARROW_DOWN;
+    case 57351:  /* Left */
+      if (shift) return SHIFT_ARROW_LEFT;
+      if (ctrl) return CTRL_ARROW_LEFT;
+      return ARROW_LEFT;
+    case 57350:  /* Right */
+      if (shift) return SHIFT_ARROW_RIGHT;
+      if (ctrl) return CTRL_ARROW_RIGHT;
+      return ARROW_RIGHT;
+
+    /* Navigation keys */
+    case 57360:  /* Home */
+      if (shift) return SHIFT_HOME;
+      return HOME_KEY;
+    case 57367:  /* End */
+      if (shift) return SHIFT_END;
+      return END_KEY;
+    case 57365:  /* Page Up */
+      return PAGE_UP;
+    case 57366:  /* Page Down */
+      return PAGE_DOWN;
+    case 57361:  /* Insert */
+      return keycode;  /* Not currently mapped */
+    case 57362:  /* Delete */
+      if (ctrl) return CTRL_DELETE;
+      return DEL_KEY;
+
+    /* Function keys */
+    case 57364:  /* F1 */
+    case 57363:  /* F2 */
+    case 57368:  /* F3 */
+    case 57369:  /* F4 */
+    case 57370:  /* F5 */
+    case 57371:  /* F6 */
+    case 57372:  /* F7 */
+    case 57373:  /* F8 */
+    case 57374:  /* F9 */
+    case 57375:  /* F10 */
+      return F10_KEY;  /* Only F10 mapped currently */
+    case 57376:  /* F11 */
+    case 57377:  /* F12 */
+      return keycode;  /* Not currently mapped */
+  }
+
+  /* Regular ASCII keys with modifiers */
+  if (keycode >= 'a' && keycode <= 'z') {
+    if (ctrl) {
+      /* Ctrl+letter: return control character */
+      return CTRL_KEY(keycode);
+    }
+    if (alt) {
+      /* Alt+letter: map to specific ALT_* codes */
+      switch (keycode) {
+        case 't': return ALT_T;
+        case 'l': return ALT_L;
+        case 'q': return ALT_Q;
+        case 'j': return ALT_J;
+        case 's': return ALT_S;
+        case 'r': return ALT_R;
+        case 'n': return ALT_N;
+        case 'w': return ALT_W;
+        case 'c': return ALT_C;
+        case 'v': return ALT_V;
+        case 'z': return ALT_Z;
+        case 'm': return ALT_M;
+      }
+    }
+    return keycode;
+  }
+
+  /* Uppercase letters with modifiers */
+  if (keycode >= 'A' && keycode <= 'Z') {
+    if (ctrl) {
+      return CTRL_KEY(keycode);
+    }
+    if (alt) {
+      int lower = keycode + 32;  /* Convert to lowercase for ALT_* lookup */
+      switch (lower) {
+        case 't': return ALT_T;
+        case 'l': return ALT_L;
+        case 'q': return ALT_Q;
+        case 'j': return ALT_J;
+        case 's': return ALT_S;
+        case 'r': return ALT_R;
+        case 'n': return ALT_N;
+        case 'w': return ALT_W;
+        case 'c': return ALT_C;
+        case 'v': return ALT_V;
+        case 'z': return ALT_Z;
+        case 'm': return ALT_M;
+      }
+    }
+    return keycode;
+  }
+
+  /* Bracket keys with Alt */
+  if (keycode == '[' && alt) return ALT_OPEN_BRACKET;
+  if (keycode == ']' && alt) return ALT_CLOSE_BRACKET;
+
+  /* Special characters with Ctrl */
+  if (ctrl) {
+    switch (keycode) {
+      case '/':  return 31;              /* Ctrl+/ sends 0x1F (legacy convention) */
+      case ']':  return CTRL_KEY(']');   /* Ctrl+] for bracket jump */
+      case '\\': return CTRL_KEY('\\');  /* Ctrl+\ for block comment */
+    }
+  }
+
+  /* Default: return the keycode as-is for printable characters */
+  if (keycode >= 32 && keycode < 127) {
+    return keycode;
+  }
+
+  return keycode;
+}
+
+/*
+ * Read a single keypress using Kitty keyboard protocol.
+ * All keys are sent as CSI sequences, providing unambiguous input.
  * Returns -1 if no input available (timeout).
  */
-int editor_read_key() {
+static int editor_read_key_kitty() {
+  int bytes_read;
+  char c;
+
+  bytes_read = read(STDIN_FILENO, &c, 1);
+  if (bytes_read == 0) return -1;
+  if (bytes_read == -1) {
+    if (errno == EAGAIN) return -1;
+    die("read");
+  }
+
+  /* In Kitty mode, ESC starts a CSI sequence */
+  if (c == CHAR_ESCAPE) {
+    char seq[64];
+    int idx = 0;
+
+    /* Read next char - should be '[' for CSI */
+    if (read(STDIN_FILENO, &c, 1) != 1) return CHAR_ESCAPE;
+
+    if (c == CHAR_CSI) {
+      /* Read until terminator */
+      while (idx < 62) {
+        if (read(STDIN_FILENO, &c, 1) != 1) return CHAR_ESCAPE;
+        seq[idx++] = c;
+        if (c == 'u' || c == '~' || c == 'M' || c == 'm' || (c >= 'A' && c <= 'Z')) break;
+      }
+      seq[idx] = '\0';
+
+      /* Mouse event: ESC [ < ... M/m */
+      if (seq[0] == '<') {
+        /* seq contains: <button;col;rowM or <button;col;rowm */
+        /* Parse directly from seq since we already read it */
+        char terminator = seq[idx - 1];
+        seq[idx - 1] = '\0';  /* Remove M/m terminator for parsing */
+
+        int button, column, row;
+        if (sscanf(seq + 1, "%d;%d;%d", &button, &column, &row) == 3) {
+          last_mouse_event.button = button;
+          last_mouse_event.is_motion = (button & MOUSE_MOTION) ? 1 : 0;
+          int btn = button & ~MOUSE_MOTION;
+          if (btn >= 64) {
+            last_mouse_event.button_base = btn;
+          } else {
+            last_mouse_event.button_base = btn & 3;
+          }
+          last_mouse_event.modifiers = btn & (MOUSE_MOD_SHIFT | MOUSE_MOD_ALT | MOUSE_MOD_CTRL);
+          last_mouse_event.column = column;
+          last_mouse_event.row = row;
+          last_mouse_event.is_release = (terminator == 'm');
+          return MOUSE_EVENT;
+        }
+        return CHAR_ESCAPE;
+      }
+
+      char terminator = seq[idx - 1];
+
+      /* Kitty CSI u format */
+      if (terminator == 'u') {
+        return parse_kitty_key_event(seq, idx);
+      }
+
+      /* Legacy-style sequences (arrows, etc. still use these in Kitty) */
+      /* Format: CSI keycode ; modifiers [: event_type] ~ */
+      /* modifiers can include +128 for key events in Kitty protocol */
+      /* event_type: 1=press, 2=repeat, 3=release (we ignore release) */
+      if (terminator == '~') {
+        seq[idx - 1] = '\0';
+        char *semi = strchr(seq, ';');
+        if (semi) {
+          *semi = '\0';
+          int num1 = atoi(seq);
+
+          /* Check for event type (colon-separated) - ignore release events */
+          char *colon = strchr(semi + 1, ':');
+          if (colon) {
+            int event_type = atoi(colon + 1);
+            if (event_type == 3) return -1;  /* Ignore key release */
+          }
+
+          int modifier = atoi(semi + 1);
+          /* Strip the +128 key event flag if present */
+          if (modifier >= 128) modifier -= 128;
+          /* Modifier is 1-based, convert to 0-based flags */
+          if (modifier > 0) modifier--;
+
+          int ctrl = (modifier & 4) != 0;
+          int shift = (modifier & 1) != 0;
+
+          switch (num1) {
+            case 1:  /* Home */
+              if (shift) return SHIFT_HOME;
+              return HOME_KEY;
+            case 3:  /* Delete */
+              if (ctrl) return CTRL_DELETE;
+              return DEL_KEY;
+            case 4:  /* End */
+              if (shift) return SHIFT_END;
+              return END_KEY;
+            case 5: return PAGE_UP;
+            case 6: return PAGE_DOWN;
+            case 7: return HOME_KEY;
+            case 8: return END_KEY;
+            case 21: return F10_KEY;
+          }
+        } else {
+          int num = atoi(seq);
+          switch (num) {
+            case 1: return HOME_KEY;
+            case 3: return DEL_KEY;
+            case 4: return END_KEY;
+            case 5: return PAGE_UP;
+            case 6: return PAGE_DOWN;
+            case 7: return HOME_KEY;
+            case 8: return END_KEY;
+            case 21: return F10_KEY;
+          }
+        }
+      } else if (terminator >= 'A' && terminator <= 'Z') {
+        /* Arrow keys and navigation: CSI [1;modifier] A/B/C/D/H/F */
+        char *semi = strchr(seq, ';');
+        int modifier = semi ? atoi(semi + 1) : 0;
+
+        switch (terminator) {
+          case 'A':  /* Up */
+            if (modifier == 2) return SHIFT_ARROW_UP;
+            if (modifier == 3) return ALT_UP;
+            if (modifier == 4) return ALT_SHIFT_UP;
+            return ARROW_UP;
+          case 'B':  /* Down */
+            if (modifier == 2) return SHIFT_ARROW_DOWN;
+            if (modifier == 3) return ALT_DOWN;
+            if (modifier == 4) return ALT_SHIFT_DOWN;
+            return ARROW_DOWN;
+          case 'C':  /* Right */
+            if (modifier == 2) return SHIFT_ARROW_RIGHT;
+            if (modifier == 5) return CTRL_ARROW_RIGHT;
+            return ARROW_RIGHT;
+          case 'D':  /* Left */
+            if (modifier == 2) return SHIFT_ARROW_LEFT;
+            if (modifier == 5) return CTRL_ARROW_LEFT;
+            return ARROW_LEFT;
+          case 'H':  /* Home */
+            if (modifier == 2) return SHIFT_HOME;
+            return HOME_KEY;
+          case 'F':  /* End */
+            if (modifier == 2) return SHIFT_END;
+            return END_KEY;
+          case 'Z':  /* Shift+Tab */
+            return SHIFT_TAB;
+        }
+      }
+
+      return CHAR_ESCAPE;
+    } else if (c == CHAR_SS3) {
+      /* SS3 sequences */
+      if (read(STDIN_FILENO, &c, 1) != 1) return CHAR_ESCAPE;
+      switch (c) {
+        case 'H': return HOME_KEY;
+        case 'F': return END_KEY;
+      }
+      return CHAR_ESCAPE;
+    }
+
+    return CHAR_ESCAPE;
+  }
+
+  return c;
+}
+
+/*
+ * Read a single keypress using legacy terminal escape sequences.
+ * Returns -1 if no input available (timeout).
+ */
+static int editor_read_key_legacy() {
   int bytes_read;
   char character;
 
-  /* Read with timeout - return -1 if no input available */
   bytes_read = read(STDIN_FILENO, &character, 1);
-  /* Timeout (VTIME expired) */
   if (bytes_read == 0) return -1;
   if (bytes_read == -1) {
-    /* Would block - no input */
     if (errno == EAGAIN) return -1;
-    /* Actual error */
     die("read");
   }
 
@@ -1137,57 +1507,31 @@ int editor_read_key() {
     if (read(STDIN_FILENO, &escape_sequence[0], 1) != 1) return CHAR_ESCAPE;
 
     /* Handle Alt+key combinations (ESC followed by a character) */
-    if (escape_sequence[0] == 't' || escape_sequence[0] == 'T') {
-      return ALT_T;
-    }
-    if (escape_sequence[0] == 'l' || escape_sequence[0] == 'L') {
-      return ALT_L;
-    }
-    if (escape_sequence[0] == 'q' || escape_sequence[0] == 'Q') {
-      return ALT_Q;
-    }
-    if (escape_sequence[0] == 'j' || escape_sequence[0] == 'J') {
-      return ALT_J;
-    }
-    if (escape_sequence[0] == 's' || escape_sequence[0] == 'S') {
-      return ALT_S;
-    }
-    if (escape_sequence[0] == 'r' || escape_sequence[0] == 'R') {
-      return ALT_R;
-    }
-    if (escape_sequence[0] == 'n' || escape_sequence[0] == 'N') {
-      return ALT_N;
-    }
-    if (escape_sequence[0] == 'w' || escape_sequence[0] == 'W') {
-      return ALT_W;
-    }
-    if (escape_sequence[0] == 'c' || escape_sequence[0] == 'C') {
-      return ALT_C;
-    }
-    if (escape_sequence[0] == 'v' || escape_sequence[0] == 'V') {
-      return ALT_V;
-    }
-    if (escape_sequence[0] == 'z' || escape_sequence[0] == 'Z') {
-      return ALT_Z;
-    }
-    if (escape_sequence[0] == 'm' || escape_sequence[0] == 'M') {
-      return ALT_M;
-    }
-    if (escape_sequence[0] == ']') {
-      return ALT_CLOSE_BRACKET;
-    }
+    if (escape_sequence[0] == 't' || escape_sequence[0] == 'T') return ALT_T;
+    if (escape_sequence[0] == 'l' || escape_sequence[0] == 'L') return ALT_L;
+    if (escape_sequence[0] == 'q' || escape_sequence[0] == 'Q') return ALT_Q;
+    if (escape_sequence[0] == 'j' || escape_sequence[0] == 'J') return ALT_J;
+    if (escape_sequence[0] == 's' || escape_sequence[0] == 'S') return ALT_S;
+    if (escape_sequence[0] == 'r' || escape_sequence[0] == 'R') return ALT_R;
+    if (escape_sequence[0] == 'n' || escape_sequence[0] == 'N') return ALT_N;
+    if (escape_sequence[0] == 'w' || escape_sequence[0] == 'W') return ALT_W;
+    if (escape_sequence[0] == 'c' || escape_sequence[0] == 'C') return ALT_C;
+    if (escape_sequence[0] == 'v' || escape_sequence[0] == 'V') return ALT_V;
+    if (escape_sequence[0] == 'z' || escape_sequence[0] == 'Z') return ALT_Z;
+    if (escape_sequence[0] == 'm' || escape_sequence[0] == 'M') return ALT_M;
+    if (escape_sequence[0] == ']') return ALT_CLOSE_BRACKET;
 
     if (read(STDIN_FILENO, &escape_sequence[1], 1) != 1) {
-      /* Timeout after ESC+char - check for Alt+[ */
-      if (escape_sequence[0] == '[') return ALT_OPEN_BRACKET;
+      if (escape_sequence[0] == CHAR_CSI) return ALT_OPEN_BRACKET;
       return CHAR_ESCAPE;
     }
 
-    if (escape_sequence[0] == '[') {
+    if (escape_sequence[0] == CHAR_CSI) {
       /* SGR mouse format: ESC [ < ... */
       if (escape_sequence[1] == '<') {
         return parse_sgr_mouse_event();
       }
+
       if (escape_sequence[1] >= '0' && escape_sequence[1] <= '9') {
         if (read(STDIN_FILENO, &escape_sequence[2], 1) != 1) return CHAR_ESCAPE;
         if (escape_sequence[2] == '~') {
@@ -1201,22 +1545,19 @@ int editor_read_key() {
             case '8': return END_KEY;
           }
         } else if (escape_sequence[1] == '2' && escape_sequence[2] == '1') {
-          /* F10: ESC [ 2 1 ~ */
           char seq3;
           if (read(STDIN_FILENO, &seq3, 1) != 1) return CHAR_ESCAPE;
           if (seq3 == '~') return F10_KEY;
         } else if (escape_sequence[1] == '3' && escape_sequence[2] == ';') {
-          /* Ctrl+Delete: ESC [ 3 ; 5 ~ */
           char seq3, seq4;
           if (read(STDIN_FILENO, &seq3, 1) != 1) return CHAR_ESCAPE;
           if (read(STDIN_FILENO, &seq4, 1) != 1) return CHAR_ESCAPE;
           if (seq3 == '5' && seq4 == '~') return CTRL_DELETE;
         } else if (escape_sequence[1] == '1' && escape_sequence[2] == ';') {
-          /* Modifier format: ESC [ 1 ; modifier key */
           char seq3, seq4;
           if (read(STDIN_FILENO, &seq3, 1) != 1) return CHAR_ESCAPE;
           if (read(STDIN_FILENO, &seq4, 1) != 1) return CHAR_ESCAPE;
-          if (seq3 == '2') {  /* Shift modifier */
+          if (seq3 == '2') {
             switch (seq4) {
               case 'A': return SHIFT_ARROW_UP;
               case 'B': return SHIFT_ARROW_DOWN;
@@ -1225,17 +1566,17 @@ int editor_read_key() {
               case 'H': return SHIFT_HOME;
               case 'F': return SHIFT_END;
             }
-          } else if (seq3 == '3') {  /* Alt modifier */
+          } else if (seq3 == '3') {
             switch (seq4) {
               case 'A': return ALT_UP;
               case 'B': return ALT_DOWN;
             }
-          } else if (seq3 == '4') {  /* Alt+Shift modifier */
+          } else if (seq3 == '4') {
             switch (seq4) {
               case 'A': return ALT_SHIFT_UP;
               case 'B': return ALT_SHIFT_DOWN;
             }
-          } else if (seq3 == '5') {  /* Ctrl modifier */
+          } else if (seq3 == '5') {
             switch (seq4) {
               case 'C': return CTRL_ARROW_RIGHT;
               case 'D': return CTRL_ARROW_LEFT;
@@ -1250,10 +1591,10 @@ int editor_read_key() {
           case 'D': return ARROW_LEFT;
           case 'H': return HOME_KEY;
           case 'F': return END_KEY;
-          case 'Z': return SHIFT_TAB;  /* Shift+Tab: ESC [ Z */
+          case 'Z': return SHIFT_TAB;
         }
       }
-    } else if (escape_sequence[0] == 'O') {
+    } else if (escape_sequence[0] == CHAR_SS3) {
       switch (escape_sequence[1]) {
         case 'H': return HOME_KEY;
         case 'F': return END_KEY;
@@ -1261,8 +1602,21 @@ int editor_read_key() {
     }
 
     return CHAR_ESCAPE;
+  }
+
+  return character;
+}
+
+/*
+ * Read a single keypress and return its key code.
+ * Dispatches to Kitty or legacy handler based on terminal mode.
+ * Returns -1 if no input available (timeout).
+ */
+int editor_read_key() {
+  if (editor.kitty_keyboard_mode) {
+    return editor_read_key_kitty();
   } else {
-    return character;
+    return editor_read_key_legacy();
   }
 }
 
@@ -1313,9 +1667,8 @@ void editor_handle_resize() {
   if (new_rows < 3) new_rows = 3;
 
   editor.screen_columns = new_cols;
-  /* Reserve rows for UI: status bar + message bar + menu bar (if visible) */
-  int reserved = SCREEN_RESERVED_ROWS + (editor.menu_bar_visible ? 1 : 0);
-  editor.screen_rows = new_rows - reserved;
+  /* Reserve rows for UI: status bar + message bar */
+  editor.screen_rows = new_rows - SCREEN_RESERVED_ROWS;
 
   /* Ensure screen_rows is at least 1 */
   if (editor.screen_rows < 1) editor.screen_rows = 1;
@@ -4892,7 +5245,12 @@ void editor_scroll() {
      * Calculate visual row position of cursor */
     int cursor_visual_row = editor_visual_rows_up_to(editor.cursor_y - 1) + editor_cursor_wrap_row();
 
-    if (editor.center_scroll) {
+    /* Disable center scroll during selection or multi-cursor operations */
+    int use_center_scroll = editor.center_scroll &&
+                            !editor.selection.active &&
+                            editor.cursor_count == 0;
+
+    if (use_center_scroll) {
       /* Typewriter scrolling: keep cursor near screen center */
       int target_rowoff = cursor_visual_row - SCREEN_CENTER;
 
@@ -4920,7 +5278,12 @@ void editor_scroll() {
     editor.column_offset = 0;
   } else {
     /* Normal scrolling without soft wrap */
-    if (editor.center_scroll) {
+    /* Disable center scroll during selection or multi-cursor operations */
+    int use_center_scroll = editor.center_scroll &&
+                            !editor.selection.active &&
+                            editor.cursor_count == 0;
+
+    if (use_center_scroll) {
       /* Typewriter scrolling: keep cursor near screen center */
       int target_rowoff = editor.cursor_y - SCREEN_CENTER;
 
@@ -5015,6 +5378,15 @@ void editor_draw_rows(struct append_buffer *ab) {
 
     /* Determine if this is the current line for background highlighting */
     int is_current_line = (fileditor_row == editor.cursor_y);
+    /* Also highlight lines with secondary cursors */
+    if (!is_current_line) {
+      for (size_t i = 0; i < editor.cursor_count; i++) {
+        if (editor.cursors[i].line == fileditor_row) {
+          is_current_line = 1;
+          break;
+        }
+      }
+    }
     rgb_color line_bg = is_current_line ? theme_get_color(THEME_UI_CURRENT_LINE)
                                         : theme_get_color(THEME_UI_BACKGROUND);
 
@@ -5180,125 +5552,6 @@ int editor_count_dirty_lines() {
   return count;
 }
 
-/*** Menu bar drawing ***/
-
-/* Draw the menu bar at the top of the screen */
-void editor_draw_menu_bar(struct append_buffer *ab) {
-  if (!editor.menu_bar_visible) return;
-
-  append_buffer_write(ab, ESCAPE_CLEAR_LINE, ESCAPE_CLEAR_LINE_LEN);
-  set_background_rgb(ab, theme_get_color(THEME_UI_STATUS_BG));
-  set_foreground_rgb(ab, theme_get_color(THEME_UI_STATUS_FG));
-
-  int x = 0;
-  for (int i = 0; i < MENU_COUNT; i++) {
-    menus[i].x_position = x;  /* Store for click detection */
-
-    /* Highlight open menu title */
-    if (editor.menu_open == i) {
-      set_background_rgb(ab, theme_get_color(THEME_UI_SELECTION_BG));
-      set_foreground_rgb(ab, theme_get_color(THEME_UI_SELECTION_FG));
-    }
-
-    append_buffer_write(ab, " ", 1);
-    append_buffer_write(ab, menus[i].title, strlen(menus[i].title));
-    append_buffer_write(ab, " ", 1);
-    x += strlen(menus[i].title) + 2;
-
-    if (editor.menu_open == i) {
-      set_background_rgb(ab, theme_get_color(THEME_UI_STATUS_BG));
-      set_foreground_rgb(ab, theme_get_color(THEME_UI_STATUS_FG));
-    }
-  }
-
-  /* Pad rest of line */
-  while (x < editor.screen_columns) {
-    append_buffer_write(ab, " ", 1);
-    x++;
-  }
-
-  reset_colors(ab);
-  append_buffer_write(ab, CRLF, CRLF_LEN);
-}
-
-/* Calculate the width needed for a menu dropdown */
-static int menu_calculate_width(menu_def *menu) {
-  int max_width = 0;
-  for (int i = 0; i < menu->item_count; i++) {
-    if (menu->items[i].label) {
-      int w = strlen(menu->items[i].label);
-      if (menu->items[i].shortcut) {
-        w += 2 + strlen(menu->items[i].shortcut);  /* spacing + shortcut */
-      }
-      if (w > max_width) max_width = w;
-    }
-  }
-  return max_width + 4;  /* Padding on left and right */
-}
-
-/* Draw the dropdown menu if one is open */
-void editor_draw_menu_dropdown(struct append_buffer *ab) {
-  if (editor.menu_open < 0 || !editor.menu_bar_visible) return;
-
-  menu_def *menu = &menus[editor.menu_open];
-  int menu_x = menu->x_position;
-  int menu_width = menu_calculate_width(menu);
-  menu->width = menu_width;  /* Store for click detection */
-
-  /* Ensure dropdown doesn't go off screen */
-  if (menu_x + menu_width > editor.screen_columns) {
-    menu_x = editor.screen_columns - menu_width;
-    if (menu_x < 0) menu_x = 0;
-  }
-
-  /* Draw each menu item */
-  for (int i = 0; i < menu->item_count; i++) {
-    /* Position cursor: row 2 (1-indexed) + item index, column menu_x+1 */
-    char pos_buf[32];
-    snprintf(pos_buf, sizeof(pos_buf), "\x1b[%d;%dH", 2 + i, menu_x + 1);
-    append_buffer_write(ab, pos_buf, strlen(pos_buf));
-
-    if (menu->items[i].label == NULL) {
-      /* Separator line */
-      set_background_rgb(ab, theme_get_color(THEME_UI_LINE_NUMBER_BG));
-      set_foreground_rgb(ab, theme_get_color(THEME_UI_FOREGROUND));
-      for (int j = 0; j < menu_width; j++) {
-        append_buffer_write(ab, "\xe2\x94\x80", 3);  /* Unicode horizontal line */
-      }
-    } else {
-      /* Regular menu item */
-      if (i == editor.menu_selected_item) {
-        set_background_rgb(ab, theme_get_color(THEME_UI_SELECTION_BG));
-        set_foreground_rgb(ab, theme_get_color(THEME_UI_SELECTION_FG));
-      } else {
-        set_background_rgb(ab, theme_get_color(THEME_UI_LINE_NUMBER_BG));
-        set_foreground_rgb(ab, theme_get_color(THEME_UI_FOREGROUND));
-      }
-
-      /* Left padding + label */
-      append_buffer_write(ab, " ", 1);
-      int label_len = strlen(menu->items[i].label);
-      append_buffer_write(ab, menu->items[i].label, label_len);
-
-      /* Calculate padding between label and shortcut */
-      int shortcut_len = menu->items[i].shortcut ? strlen(menu->items[i].shortcut) : 0;
-      int pad = menu_width - label_len - shortcut_len - 2;  /* -2 for left/right padding */
-      for (int j = 0; j < pad; j++) {
-        append_buffer_write(ab, " ", 1);
-      }
-
-      /* Shortcut (if any) + right padding */
-      if (menu->items[i].shortcut) {
-        append_buffer_write(ab, menu->items[i].shortcut, shortcut_len);
-      }
-      append_buffer_write(ab, " ", 1);
-    }
-  }
-
-  /* Reset colors */
-  reset_colors(ab);
-}
-
 /* Draw the status bar showing filename, line count, and cursor position.
  * Uses reverse video for visibility. */
 void editor_draw_status_bar(struct append_buffer *ab) {
@@ -5315,12 +5568,15 @@ void editor_draw_status_bar(struct append_buffer *ab) {
   int dirty_count = editor_count_dirty_lines();
   const char *sync_status = (dirty_count > 0) ? ESCAPE_STRIKETHROUGH_START "Synced" ESCAPE_STRIKETHROUGH_END : "Synced";
 
+  /* Keyboard protocol indicator */
+  const char *kb_mode = editor.kitty_keyboard_mode ? "Kitty" : "Legacy";
+
   /* Calculate ANSI escape code length (invisible characters)
    * \x1b[9m (4) + \x1b[29m (5) = 9 */
   int ansi_escape_length = (dirty_count > 0) ? 9 : 0;
 
-  int right_status_length = snprintf(rstatus, sizeof(rstatus), "%s | %s | %s | %d/%d",
-    editor.syntax ? editor.syntax->filetype : "no ft", theme_get_name(), sync_status, editor.cursor_y + 1, editor.row_count);
+  int right_status_length = snprintf(rstatus, sizeof(rstatus), "%s | %s | %s | %s | %d/%d",
+    editor.syntax ? editor.syntax->filetype : "no ft", theme_get_name(), kb_mode, sync_status, editor.cursor_y + 1, editor.row_count);
 
   /* Adjust right_status_length to account for ANSI escape codes */
   int right_status_visible_length = right_status_length - ansi_escape_length;
@@ -5383,15 +5639,12 @@ void editor_refresh_screen() {
   append_buffer_write(&ab, ESCAPE_HIDE_CURSOR, ESCAPE_HIDE_CURSOR_LEN);
   append_buffer_write(&ab, ESCAPE_CURSOR_HOME, ESCAPE_CURSOR_HOME_LEN);
 
-  editor_draw_menu_bar(&ab);
   editor_draw_rows(&ab);
   editor_draw_status_bar(&ab);
   editor_draw_message_bar(&ab);
-  editor_draw_menu_dropdown(&ab);  /* Draw dropdown overlay last */
 
-  /* Position cursor accounting for menu bar */
+  /* Position cursor */
   int cursor_row = (editor.cursor_y - editor.row_offset) + 1;
-  if (editor.menu_bar_visible) cursor_row++;  /* Offset for menu bar */
   char cursor_buffer[CURSOR_POSITION_BUFFER_SIZE];
   snprintf(cursor_buffer, sizeof(cursor_buffer), ESCAPE_CURSOR_POSITION_FORMAT, cursor_row,
                                             (editor.render_x - editor.column_offset) + editor.gutter_width + 1);
@@ -5405,7 +5658,6 @@ void editor_refresh_screen() {
 
     /* Convert to screen coordinates */
     int screen_row = file_row - editor.row_offset + 1;
-    if (editor.menu_bar_visible) screen_row++;
 
     /* Calculate render_x for this cursor (handle tabs) */
     int render_col = 0;
@@ -6812,178 +7064,9 @@ void editor_update_scroll_speed(void) {
   editor.last_scroll_time = now;
 }
 
-/* Convert screen coordinates to file position and handle mouse action */
-/* Track if menu was just opened to prevent immediate toggle-off */
-static int menu_just_opened = 0;
-
-/* Handle click on menu bar (row 0 when menu visible) */
-static void menu_handle_bar_click(int x) {
-  if (x < 0) return;  /* Sanity check */
-
-  for (int i = 0; i < MENU_COUNT; i++) {
-    if (!menus[i].title) continue;  /* Safety check */
-    int start = menus[i].x_position;
-    int end = start + (int)strlen(menus[i].title) + 2;
-    if (x >= start && x < end) {
-      if (editor.menu_open == i && !menu_just_opened) {
-        editor.menu_open = -1;  /* Toggle off (only if not just opened) */
-      } else {
-        editor.menu_open = i;
-        editor.menu_selected_item = 0;
-        menu_just_opened = 1;  /* Mark as just opened */
-        /* Skip separators for initial selection */
-        while (editor.menu_selected_item < menus[i].item_count &&
-               menus[i].items[editor.menu_selected_item].label == NULL) {
-          editor.menu_selected_item++;
-        }
-      }
-      return;
-    }
-  }
-  editor.menu_open = -1;  /* Click outside menus closes */
-  menu_just_opened = 0;
-}
-
-/* Handle click on dropdown menu item */
-static int menu_handle_dropdown_click(int x, int y) {
-  if (editor.menu_open < 0 || editor.menu_open >= MENU_COUNT) return 0;
-
-  menu_def *menu = &menus[editor.menu_open];
-  int menu_x = menu->x_position;
-
-  /* Calculate width if not set yet */
-  int menu_width = menu->width;
-  if (menu_width <= 0) {
-    menu_width = menu_calculate_width(menu);
-  }
-
-  /* Ensure dropdown position matches render logic */
-  if (menu_x + menu_width > editor.screen_columns) {
-    menu_x = editor.screen_columns - menu_width;
-    if (menu_x < 0) menu_x = 0;
-  }
-
-  /* Check if click is within dropdown bounds */
-  /* Dropdown starts at row 1 (0-indexed), below menu bar */
-  int item_idx = y - 1;  /* y=1 -> item 0, y=2 -> item 1, etc. */
-
-  if (x >= menu_x && x < menu_x + menu_width &&
-      item_idx >= 0 && item_idx < menu->item_count) {
-    menu_item *item = &menu->items[item_idx];
-    if (item->label != NULL) {  /* Not a separator */
-      editor.menu_open = -1;
-      if (item->action) {
-        item->action();
-      }
-      return 1;
-    }
-  }
-  return 0;
-}
-
-/* Execute currently selected menu item */
-static void menu_execute_selected(void) {
-  if (editor.menu_open < 0) return;
-
-  menu_def *menu = &menus[editor.menu_open];
-  if (editor.menu_selected_item >= 0 && editor.menu_selected_item < menu->item_count) {
-    menu_item *item = &menu->items[editor.menu_selected_item];
-    if (item->label != NULL && item->action) {
-      editor.menu_open = -1;
-      item->action();
-    }
-  }
-}
-
-/* Move selection in dropdown menu */
-static void menu_move_selection(int direction) {
-  if (editor.menu_open < 0) return;
-
-  menu_def *menu = &menus[editor.menu_open];
-  int new_sel = editor.menu_selected_item + direction;
-
-  /* Skip separators */
-  while (new_sel >= 0 && new_sel < menu->item_count &&
-         menu->items[new_sel].label == NULL) {
-    new_sel += direction;
-  }
-
-  /* Bounds check */
-  if (new_sel >= 0 && new_sel < menu->item_count) {
-    editor.menu_selected_item = new_sel;
-  }
-}
-
-/* Switch to previous/next menu */
-static void menu_switch(int direction) {
-  if (editor.menu_open < 0) return;
-
-  int new_menu = editor.menu_open + direction;
-  if (new_menu < 0) new_menu = MENU_COUNT - 1;
-  if (new_menu >= MENU_COUNT) new_menu = 0;
-
-  editor.menu_open = new_menu;
-  editor.menu_selected_item = 0;
-  /* Skip separators for initial selection */
-  while (editor.menu_selected_item < menus[new_menu].item_count &&
-         menus[new_menu].items[editor.menu_selected_item].label == NULL) {
-    editor.menu_selected_item++;
-  }
-}
-
 void editor_handle_mouse_event() {
   int screen_x = last_mouse_event.column - 1;
   int screen_y = last_mouse_event.row - 1;
-
-  /* Handle menu bar interactions (when menu visible) */
-  if (editor.menu_bar_visible) {
-    /* When a menu is open, consume all mouse events except:
-     * - Press on menu bar (to switch menus)
-     * - Press on dropdown item (to select)
-     * - Press outside (to close)
-     */
-    if (editor.menu_open >= 0) {
-      /* Ignore releases and motion entirely when menu is open */
-      if (last_mouse_event.is_release || last_mouse_event.is_motion) {
-        /* Clear the "just opened" flag on release so next click can toggle */
-        if (last_mouse_event.is_release) {
-          menu_just_opened = 0;
-        }
-        return;
-      }
-
-      /* Only process left button presses */
-      if (last_mouse_event.button_base == MOUSE_BUTTON_LEFT) {
-        /* Click on menu bar - switch menus or close */
-        if (screen_y == 0) {
-          menu_handle_bar_click(screen_x);
-          return;
-        }
-
-        /* Click on dropdown area */
-        if (menu_handle_dropdown_click(screen_x, screen_y)) {
-          return;
-        }
-
-        /* Click outside - close menu */
-        editor.menu_open = -1;
-        return;
-      }
-
-      /* Ignore other button presses when menu open */
-      return;
-    }
-
-    /* No menu open - check for click on menu bar to open one */
-    if (screen_y == 0 && last_mouse_event.button_base == MOUSE_BUTTON_LEFT &&
-        !last_mouse_event.is_motion && !last_mouse_event.is_release) {
-      menu_handle_bar_click(screen_x);
-      return;
-    }
-
-    /* Adjust screen_y for text area (menu bar takes row 0) */
-    screen_y--;
-  }
 
   /* Handle scroll wheel with tactile (velocity-based) speed */
   if (last_mouse_event.button_base == MOUSE_SCROLL_UP) {
@@ -6991,12 +7074,20 @@ void editor_handle_mouse_event() {
     for (int i = 0; i < editor.scroll_speed; i++) {
       editor_move_cursor(ARROW_UP);
     }
+    /* Extend selection if active (for drag-scroll selection) */
+    if (editor.selection.active) {
+      selection_extend();
+    }
     return;
   }
   if (last_mouse_event.button_base == MOUSE_SCROLL_DOWN) {
     editor_update_scroll_speed();
     for (int i = 0; i < editor.scroll_speed; i++) {
       editor_move_cursor(ARROW_DOWN);
+    }
+    /* Extend selection if active (for drag-scroll selection) */
+    if (editor.selection.active) {
+      selection_extend();
     }
     return;
   }
@@ -7130,63 +7221,6 @@ void editor_process_keypress() {
   /* No input available (timeout) - return immediately */
   if (key == -1) return;
 
-  /* Check for menu quit request from menu action */
-  if (menu_quit_requested) {
-    menu_quit_requested = 0;
-    if (editor.dirty) {
-      editor_set_status_message("Save first (Ctrl+S) or Ctrl+Q 3x to quit");
-    } else {
-      write(STDOUT_FILENO, ESCAPE_CLEAR_SCREEN, ESCAPE_CLEAR_SCREEN_LEN);
-      write(STDOUT_FILENO, ESCAPE_CURSOR_HOME, ESCAPE_CURSOR_HOME_LEN);
-      /* removed */
-      exit(0);
-    }
-    return;
-  }
-
-  /* Handle menu keyboard navigation when a menu is open */
-  if (editor.menu_open >= 0) {
-    switch (key) {
-      case CHAR_ESCAPE:
-        editor.menu_open = -1;
-        return;
-      case ARROW_UP:
-        menu_move_selection(-1);
-        return;
-      case ARROW_DOWN:
-        menu_move_selection(1);
-        return;
-      case ARROW_LEFT:
-        menu_switch(-1);
-        return;
-      case ARROW_RIGHT:
-        menu_switch(1);
-        return;
-      case '\r':
-        menu_execute_selected();
-        return;
-      case MOUSE_EVENT:
-        /* Let mouse events be handled below - don't close menu */
-        break;
-      default:
-        /* Close menu on any other key */
-        editor.menu_open = -1;
-        /* Fall through to normal key processing */
-        break;
-    }
-  }
-
-  /* F10 opens/closes the menu bar */
-  if (key == F10_KEY && editor.menu_bar_visible) {
-    if (editor.menu_open >= 0) {
-      editor.menu_open = -1;
-    } else {
-      editor.menu_open = 0;
-      editor.menu_selected_item = 0;
-    }
-    return;
-  }
-
   /* Reset Smart Home toggle state for all keys except Home */
   if (key != HOME_KEY) {
     editor.last_key_was_home = 0;
@@ -7314,14 +7348,6 @@ void editor_process_keypress() {
 
     case ALT_CLOSE_BRACKET:
       editor_skip_closing_pair();
-      break;
-
-    case ALT_M:
-      /* Toggle menu bar visibility */
-      editor.menu_bar_visible = !editor.menu_bar_visible;
-      editor.menu_open = -1;  /* Close any open menu */
-      /* Recalculate screen rows */
-      editor_handle_resize();
       break;
 
     case BACKSPACE:
@@ -8041,12 +8067,49 @@ void reset_colors(struct append_buffer *ab) {
 
 /* Map color name string to theme_color enum index.
  * Returns -1 if name not found. */
+/* Convert string to uppercase in-place for comparison */
+static void str_to_upper(char *s) {
+  for (; *s; s++) {
+    if (*s >= 'a' && *s <= 'z') *s -= 32;
+  }
+}
+
+/* Flexible color name lookup supporting multiple formats:
+ * - Exact: "SYNTAX_NORMAL"
+ * - Lowercase: "syntax_normal"
+ * - Short form: "normal" -> SYNTAX_NORMAL, "background" -> UI_BACKGROUND
+ * - Prefixed: "syntax_normal", "ui_background"
+ */
 int theme_color_name_to_index(const char *name) {
+  char normalized[64];
+  strncpy(normalized, name, sizeof(normalized) - 1);
+  normalized[sizeof(normalized) - 1] = '\0';
+  str_to_upper(normalized);
+
+  /* Try exact match first */
   for (int i = 0; i < (int)THEME_COLOR_SLOT_COUNT; i++) {
-    if (strcmp(theme_color_names[i], name) == 0) {
+    if (strcmp(theme_color_names[i], normalized) == 0) {
       return i;
     }
   }
+
+  /* Try with SYNTAX_ prefix */
+  char prefixed[80];
+  snprintf(prefixed, sizeof(prefixed), "SYNTAX_%s", normalized);
+  for (int i = 0; i < (int)THEME_COLOR_SLOT_COUNT; i++) {
+    if (strcmp(theme_color_names[i], prefixed) == 0) {
+      return i;
+    }
+  }
+
+  /* Try with UI_ prefix */
+  snprintf(prefixed, sizeof(prefixed), "UI_%s", normalized);
+  for (int i = 0; i < (int)THEME_COLOR_SLOT_COUNT; i++) {
+    if (strcmp(theme_color_names[i], prefixed) == 0) {
+      return i;
+    }
+  }
+
   return -1;
 }
 
@@ -8080,13 +8143,49 @@ void theme_registry_free() {
   loaded_theme_capacity = 0;
 }
 
+/* Helper to parse a color value from hex (#RRGGBB) or RGB (r, g, b) format.
+ * Returns 1 on success, 0 on failure. */
+static int parse_color_value(const char *value, rgb_color *out) {
+  /* Skip leading whitespace */
+  while (*value == ' ' || *value == '\t') value++;
+
+  /* Try hex format: #RRGGBB */
+  if (*value == '#') {
+    unsigned int rgb;
+    if (sscanf(value, "#%6x", &rgb) == 1) {
+      out->r = (rgb >> 16) & 0xFF;
+      out->g = (rgb >> 8) & 0xFF;
+      out->b = rgb & 0xFF;
+      return 1;
+    }
+  }
+
+  /* Try RGB format: r, g, b */
+  int r, g, b;
+  if (sscanf(value, "%d, %d, %d", &r, &g, &b) == 3 ||
+      sscanf(value, "%d,%d,%d", &r, &g, &b) == 3) {
+    out->r = (unsigned char)r;
+    out->g = (unsigned char)g;
+    out->b = (unsigned char)b;
+    return 1;
+  }
+
+  return 0;
+}
+
 /* Parse a .def file and add theme to registry.
+ * Supports multiple formats:
+ * - X(NAME, r, g, b, desc) - traditional X-macro
+ * - name = #RRGGBB - hex color
+ * - name = r, g, b - simple RGB
+ * - @base: ThemeName - inherit from another theme
  * Returns 1 on success, 0 on failure. */
 int theme_load_from_file(const char *filepath) {
   FILE *f = fopen(filepath, "r");
   if (!f) return 0;
 
   char name[64] = "Unknown";
+  char base_theme[64] = "";
   rgb_color colors[THEME_COLOR_COUNT];
   /* Initialize with fallback colors */
   memcpy(colors, fallback_theme_colors, sizeof(colors));
@@ -8105,7 +8204,19 @@ int theme_load_from_file(const char *filepath) {
       continue;
     }
 
-    /* Parse X(NAME, r, g, b, desc) */
+    /* Parse @base from comment header for theme inheritance */
+    char base_buf[64];
+    if (sscanf(line, "/* @base: %63[^*]", base_buf) == 1) {
+      /* Trim trailing spaces and copy */
+      char *end = base_buf + strlen(base_buf) - 1;
+      while (end > base_buf && (*end == ' ' || *end == '\t')) end--;
+      *(end + 1) = '\0';
+      strncpy(base_theme, base_buf, sizeof(base_theme) - 1);
+      base_theme[sizeof(base_theme) - 1] = '\0';
+      continue;
+    }
+
+    /* Parse X(NAME, r, g, b, desc) - traditional format */
     char color_name[64];
     int r, g, b;
     if (sscanf(line, "X(%63[^,], %d, %d, %d,", color_name, &r, &g, &b) == 4) {
@@ -8115,9 +8226,90 @@ int theme_load_from_file(const char *filepath) {
         colors[idx].g = (unsigned char)g;
         colors[idx].b = (unsigned char)b;
       }
+      continue;
+    }
+
+    /* Parse simple format: color_name = value */
+    char *eq = strchr(line, '=');
+    if (eq) {
+      *eq = '\0';
+      char *key = line;
+      char *value = eq + 1;
+
+      /* Trim whitespace from key */
+      while (*key == ' ' || *key == '\t') key++;
+      char *key_end = key + strlen(key) - 1;
+      while (key_end > key && (*key_end == ' ' || *key_end == '\t')) key_end--;
+      *(key_end + 1) = '\0';
+
+      /* Skip empty keys or comment lines */
+      if (*key == '\0' || *key == '/' || *key == '#') continue;
+
+      int idx = theme_color_name_to_index(key);
+      if (idx >= 0 && idx < (int)THEME_COLOR_SLOT_COUNT) {
+        rgb_color parsed;
+        if (parse_color_value(value, &parsed)) {
+          colors[idx] = parsed;
+        }
+      }
     }
   }
   fclose(f);
+
+  /* Apply base theme inheritance if specified */
+  if (base_theme[0] != '\0') {
+    int base_idx = theme_find_by_name(base_theme);
+    if (base_idx >= 0) {
+      /* Start with base theme, then apply our overrides */
+      rgb_color base_colors[THEME_COLOR_COUNT];
+      memcpy(base_colors, loaded_themes[base_idx].colors, sizeof(base_colors));
+
+      /* Re-parse file to apply overrides on top of base */
+      f = fopen(filepath, "r");
+      if (f) {
+        while (fgets(line, sizeof(line), f)) {
+          /* Skip @name and @base lines */
+          if (strstr(line, "@name:") || strstr(line, "@base:")) continue;
+
+          /* Parse X-macro format */
+          char color_name[64];
+          int r, g, b;
+          if (sscanf(line, "X(%63[^,], %d, %d, %d,", color_name, &r, &g, &b) == 4) {
+            int idx = theme_color_name_to_index(color_name);
+            if (idx >= 0 && idx < (int)THEME_COLOR_SLOT_COUNT) {
+              base_colors[idx].r = (unsigned char)r;
+              base_colors[idx].g = (unsigned char)g;
+              base_colors[idx].b = (unsigned char)b;
+            }
+            continue;
+          }
+
+          /* Parse simple format */
+          char *eq = strchr(line, '=');
+          if (eq) {
+            *eq = '\0';
+            char *key = line;
+            char *value = eq + 1;
+            while (*key == ' ' || *key == '\t') key++;
+            char *key_end = key + strlen(key) - 1;
+            while (key_end > key && (*key_end == ' ' || *key_end == '\t')) key_end--;
+            *(key_end + 1) = '\0';
+            if (*key == '\0' || *key == '/' || *key == '#') continue;
+
+            int idx = theme_color_name_to_index(key);
+            if (idx >= 0 && idx < (int)THEME_COLOR_SLOT_COUNT) {
+              rgb_color parsed;
+              if (parse_color_value(value, &parsed)) {
+                base_colors[idx] = parsed;
+              }
+            }
+          }
+        }
+        fclose(f);
+        memcpy(colors, base_colors, sizeof(colors));
+      }
+    }
+  }
 
   /* Add to registry */
   theme_registry_add(name, colors);
@@ -8193,6 +8385,63 @@ void theme_init() {
   theme_load(0);
 }
 
+/* Apply color overrides from config file [colors] section.
+ * Call after theme_load() to override specific colors. */
+static void config_apply_color_overrides() {
+  FILE *f = fopen("miter.conf", "r");
+  if (!f) {
+    /* Try legacy config name */
+    f = fopen("terra.conf", "r");
+    if (!f) return;
+  }
+
+  char line[256];
+  int in_colors_section = 0;
+
+  while (fgets(line, sizeof(line), f)) {
+    /* Check for [colors] section header */
+    if (strncmp(line, "[colors]", 8) == 0) {
+      in_colors_section = 1;
+      continue;
+    }
+
+    /* Check for other section headers (exit [colors] section) */
+    if (line[0] == '[') {
+      in_colors_section = 0;
+      continue;
+    }
+
+    /* Only parse color overrides in [colors] section */
+    if (!in_colors_section) continue;
+
+    /* Parse color_name = value */
+    char *eq = strchr(line, '=');
+    if (eq) {
+      *eq = '\0';
+      char *key = line;
+      char *value = eq + 1;
+
+      /* Trim whitespace from key */
+      while (*key == ' ' || *key == '\t') key++;
+      char *key_end = key + strlen(key) - 1;
+      while (key_end > key && (*key_end == ' ' || *key_end == '\t')) key_end--;
+      *(key_end + 1) = '\0';
+
+      /* Skip empty keys or comment lines */
+      if (*key == '\0' || *key == '#' || *key == ';') continue;
+
+      int idx = theme_color_name_to_index(key);
+      if (idx >= 0 && idx < (int)THEME_COLOR_SLOT_COUNT) {
+        rgb_color parsed;
+        if (parse_color_value(value, &parsed)) {
+          active_theme[idx] = parsed;
+        }
+      }
+    }
+  }
+  fclose(f);
+}
+
 /* Load a theme by index into the active color palette. */
 void theme_load(int index) {
   if (loaded_theme_count == 0) {
@@ -8205,6 +8454,9 @@ void theme_load(int index) {
   }
   editor.current_theme_index = index;
   memcpy(active_theme, loaded_themes[index].colors, sizeof(active_theme));
+
+  /* Apply any color overrides from config file */
+  config_apply_color_overrides();
 }
 
 /* Cycle to next theme and save preference. */
@@ -8227,7 +8479,7 @@ const char* theme_get_name() {
 
 /* Save current theme (by name) and preferences to config file. */
 void theme_save() {
-  FILE *file_pointer = fopen("terra.conf", "w");
+  FILE *file_pointer = fopen("miter.conf", "w");
   if (file_pointer == NULL) return;
 
   /* Save theme by name instead of index for stability */
@@ -8240,10 +8492,14 @@ void theme_save() {
 /* Load theme name from config file into name_buf.
  * Returns 1 if found, 0 if not found or error. */
 int theme_load_name_from_config(char *name_buf, int buf_size) {
-  FILE *file_pointer = fopen("terra.conf", "r");
+  FILE *file_pointer = fopen("miter.conf", "r");
   if (file_pointer == NULL) {
-    editor.show_line_numbers = 1;
-    return 0;
+    /* Try legacy config name */
+    file_pointer = fopen("terra.conf", "r");
+    if (file_pointer == NULL) {
+      editor.show_line_numbers = 1;
+      return 0;
+    }
   }
 
   char line[CONFIG_LINE_BUFFER_SIZE];
@@ -8341,20 +8597,14 @@ void editor_init() {
   editor.undo_stack_capacity = 0;
   clock_gettime(CLOCK_MONOTONIC, &editor.last_edit_time);
 
-  /* Menu bar visible by default */
-  editor.menu_bar_visible = 1;
-  editor.menu_open = -1;
-  editor.menu_selected_item = 0;
-
   if (window_get_size(&editor.screen_rows, &editor.screen_columns) == -1) die("window_get_size");
 
   /* Enforce minimum usable dimensions */
   if (editor.screen_columns < 10) editor.screen_columns = 10;
   if (editor.screen_rows < 3) editor.screen_rows = 3;
 
-  /* Reserve rows for UI: status bar + message bar + menu bar (if visible) */
-  int reserved = SCREEN_RESERVED_ROWS + (editor.menu_bar_visible ? 1 : 0);
-  editor.screen_rows -= reserved;
+  /* Reserve rows for UI: status bar + message bar */
+  editor.screen_rows -= SCREEN_RESERVED_ROWS;
   if (editor.screen_rows < 1) editor.screen_rows = 1;
 
   /* Register signal handler for terminal resize */

@@ -1,0 +1,27 @@
+/* @name: Zinc */
+/* Colorblind safe theme */
+
+background = #18181b
+foreground = #e4e4e7
+comment = #71717a
+keyword1 = #a1a1aa
+keyword2 = #d4d4d8
+string = #fbbf24
+number = #22d3ee
+match = #f87171
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #a1a1aa
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #e4e4e7
+tilde = #303040
+bracket_match = #22d3ee
+bracket_unmatch = #f87171

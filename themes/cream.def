@@ -1,30 +1,27 @@
 /* @name: Cream */
-/* Warm off-white theme */
+/* Colorblind safe light theme */
 
-/* Syntax highlighting */
-X(SYNTAX_NORMAL,            50,  45,  40, "Normal text")
-X(SYNTAX_COMMENT,          140, 130, 120, "Comments")
-X(SYNTAX_KEYWORD1,         140,  80,  60, "Keywords - rust")
-X(SYNTAX_KEYWORD2,          60, 100, 140, "Type keywords - blue")
-X(SYNTAX_STRING,            80, 120,  80, "Strings - green")
-X(SYNTAX_NUMBER,           160, 100,  60, "Numbers - brown")
-X(SYNTAX_MATCH,            255, 220, 140, "Search match")
+background = #fdfbf7
+foreground = #292524
+comment = #78716c
+keyword1 = #1e40af
+keyword2 = #3b82f6
+string = #b45309
+number = #0f766e
+match = #c2410c
 
-/* UI elements */
-X(UI_BACKGROUND,           252, 248, 240, "Background - cream")
-X(UI_FOREGROUND,            50,  45,  40, "Foreground")
-X(UI_LINE_NUMBER,          180, 170, 160, "Line numbers")
-X(UI_LINE_NUMBER_CURRENT,  100,  90,  80, "Current line number")
-X(UI_LINE_NUMBER_DIRTY,    180, 120,  60, "Dirty line number")
-X(UI_LINE_NUMBER_BG,       245, 240, 230, "Line number gutter")
-X(UI_CURRENT_LINE,         245, 240, 228, "Current line highlight")
-X(UI_SELECTION_BG,         220, 200, 170, "Selection background")
-X(UI_SELECTION_FG,          50,  45,  40, "Selection text")
-X(UI_STATUS_BG,            140,  80,  60, "Status bar background")
-X(UI_STATUS_FG,            255, 255, 255, "Status bar text")
-X(UI_MESSAGE_BG,            60, 100, 140, "Message bar background")
-X(UI_MESSAGE_FG,           255, 255, 255, "Message bar text")
-X(UI_CURSOR,                50,  45,  40, "Cursor")
-X(UI_TILDE,                200, 190, 180, "Empty line tilde")
-X(UI_BRACKET_MATCH,        140,  80,  60, "Matched bracket")
-X(UI_BRACKET_UNMATCH,      180,  80,  80, "Unmatched bracket")
+line_number = #909098
+line_number_current = #303038
+line_number_dirty = #685820
+line_number_bg = #f0f0f4
+current_line = #e8e8f0
+selection_bg = #3b82f6
+selection_fg = #ffffff
+status_bg = #d8d8dc
+status_fg = #505058
+message_bg = #ececf0
+message_fg = #505058
+cursor = #292524
+tilde = #c0c0c8
+bracket_match = #0f766e
+bracket_unmatch = #c2410c

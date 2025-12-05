@@ -1,0 +1,27 @@
+/* @name: Periwinkle */
+/* Colorblind safe light theme */
+
+background = #f5f5ff
+foreground = #1e1e5a
+comment = #5050a0
+keyword1 = #3030c0
+keyword2 = #5050e0
+string = #c0a030
+number = #30a0a0
+match = #c05050
+
+line_number = #909098
+line_number_current = #303038
+line_number_dirty = #685820
+line_number_bg = #f0f0f4
+current_line = #e8e8f0
+selection_bg = #5050e0
+selection_fg = #ffffff
+status_bg = #d8d8dc
+status_fg = #505058
+message_bg = #ececf0
+message_fg = #505058
+cursor = #1e1e5a
+tilde = #c0c0c8
+bracket_match = #30a0a0
+bracket_unmatch = #c05050

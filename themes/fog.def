@@ -1,0 +1,27 @@
+/* @name: Fog */
+/* Colorblind safe light theme */
+
+background = #edf2f7
+foreground = #1a202c
+comment = #718096
+keyword1 = #3182ce
+keyword2 = #63b3ed
+string = #ed8936
+number = #38b2ac
+match = #e53e3e
+
+line_number = #909098
+line_number_current = #303038
+line_number_dirty = #685820
+line_number_bg = #f0f0f4
+current_line = #e8e8f0
+selection_bg = #63b3ed
+selection_fg = #ffffff
+status_bg = #d8d8dc
+status_fg = #505058
+message_bg = #ececf0
+message_fg = #505058
+cursor = #1a202c
+tilde = #c0c0c8
+bracket_match = #38b2ac
+bracket_unmatch = #e53e3e

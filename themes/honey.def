@@ -1,0 +1,27 @@
+/* @name: Honey */
+/* Colorblind safe light theme */
+
+background = #fef9c3
+foreground = #422006
+comment = #854d0e
+keyword1 = #1e40af
+keyword2 = #3b82f6
+string = #a16207
+number = #0f766e
+match = #b91c1c
+
+line_number = #909098
+line_number_current = #303038
+line_number_dirty = #685820
+line_number_bg = #f0f0f4
+current_line = #e8e8f0
+selection_bg = #3b82f6
+selection_fg = #ffffff
+status_bg = #d8d8dc
+status_fg = #505058
+message_bg = #ececf0
+message_fg = #505058
+cursor = #422006
+tilde = #c0c0c8
+bracket_match = #0f766e
+bracket_unmatch = #b91c1c

@@ -1,0 +1,27 @@
+/* @name: Nebula */
+/* Purple nebula theme - colorblind safe */
+
+background = #13111c
+foreground = #e4e0fb
+comment = #6e6a8e
+keyword1 = #bd93f9
+keyword2 = #d6acff
+string = #f1fa8c
+number = #8be9fd
+match = #ffb86c
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #21203a
+selection_bg = #6c5ce7
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #e4e0fb
+tilde = #21203a
+bracket_match = #8be9fd
+bracket_unmatch = #ffb86c

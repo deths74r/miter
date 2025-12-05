@@ -1,0 +1,27 @@
+/* @name: Cobalt Night */
+/* Colorblind safe theme */
+
+background = #001830
+foreground = #e0f0ff
+comment = #406080
+keyword1 = #4080d0
+keyword2 = #60a0f0
+string = #f0d060
+number = #40c0a0
+match = #f08060
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #4080d0
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #e0f0ff
+tilde = #303040
+bracket_match = #40c0a0
+bracket_unmatch = #f08060

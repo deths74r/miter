@@ -1,0 +1,27 @@
+/* @name: Midnight Blue2 */
+/* Colorblind safe theme */
+
+background = #0a1020
+foreground = #d0e0f0
+comment = #405070
+keyword1 = #4080c0
+keyword2 = #60a0e0
+string = #e0c060
+number = #40b090
+match = #e08050
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #4080c0
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #d0e0f0
+tilde = #303040
+bracket_match = #40b090
+bracket_unmatch = #e08050

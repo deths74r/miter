@@ -1,0 +1,27 @@
+/* @name: Void */
+/* Ultra dark void theme - colorblind safe */
+
+background = #050505
+foreground = #c8c8c8
+comment = #5f5f5f
+keyword1 = #5fafd7
+keyword2 = #87d7d7
+string = #d7af5f
+number = #5fd7af
+match = #d75f5f
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #101010
+selection_bg = #005f87
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #c8c8c8
+tilde = #101010
+bracket_match = #5fd7af
+bracket_unmatch = #d75f5f

@@ -1,0 +1,27 @@
+/* @name: Phantom */
+/* Phantom dark theme - colorblind safe */
+
+background = #1a1a2e
+foreground = #eaeaea
+comment = #525281
+keyword1 = #4ecdc4
+keyword2 = #45b7d1
+string = #ffd93d
+number = #95d5b2
+match = #ff6b6b
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252545
+selection_bg = #4ecdc4
+selection_fg = #1a1a2e
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #eaeaea
+tilde = #252545
+bracket_match = #45b7d1
+bracket_unmatch = #ff6b6b

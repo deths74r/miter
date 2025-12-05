@@ -1,0 +1,27 @@
+/* @name: Plum */
+/* Colorblind safe theme */
+
+background = #201828
+foreground = #e8e0f0
+comment = #705880
+keyword1 = #a070b0
+keyword2 = #b888c8
+string = #d8c080
+number = #80b0a8
+match = #c88080
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #a070b0
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #e8e0f0
+tilde = #303040
+bracket_match = #80b0a8
+bracket_unmatch = #c88080

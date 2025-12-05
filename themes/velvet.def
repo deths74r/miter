@@ -1,0 +1,27 @@
+/* @name: Velvet */
+/* Colorblind safe theme */
+
+background = #1b1429
+foreground = #e6e6fa
+comment = #6d5c8a
+keyword1 = #da70d6
+keyword2 = #dda0dd
+string = #f0e68c
+number = #87ceeb
+match = #ffa07a
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #da70d6
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #e6e6fa
+tilde = #303040
+bracket_match = #87ceeb
+bracket_unmatch = #ffa07a

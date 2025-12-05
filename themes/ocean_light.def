@@ -1,0 +1,27 @@
+/* @name: Ocean Light */
+/* Colorblind safe light theme */
+
+background = #e3f2fd
+foreground = #0d47a1
+comment = #1565c0
+keyword1 = #1565c0
+keyword2 = #1e88e5
+string = #f57c00
+number = #00897b
+match = #d32f2f
+
+line_number = #909098
+line_number_current = #303038
+line_number_dirty = #685820
+line_number_bg = #f0f0f4
+current_line = #e8e8f0
+selection_bg = #1e88e5
+selection_fg = #ffffff
+status_bg = #d8d8dc
+status_fg = #505058
+message_bg = #ececf0
+message_fg = #505058
+cursor = #0d47a1
+tilde = #c0c0c8
+bracket_match = #00897b
+bracket_unmatch = #d32f2f

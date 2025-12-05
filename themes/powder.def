@@ -1,0 +1,27 @@
+/* @name: Powder */
+/* Colorblind safe light theme */
+
+background = #f0f8ff
+foreground = #1a365d
+comment = #2c5282
+keyword1 = #2b6cb0
+keyword2 = #4299e1
+string = #dd6b20
+number = #319795
+match = #c53030
+
+line_number = #909098
+line_number_current = #303038
+line_number_dirty = #685820
+line_number_bg = #f0f0f4
+current_line = #e8e8f0
+selection_bg = #4299e1
+selection_fg = #ffffff
+status_bg = #d8d8dc
+status_fg = #505058
+message_bg = #ececf0
+message_fg = #505058
+cursor = #1a365d
+tilde = #c0c0c8
+bracket_match = #319795
+bracket_unmatch = #c53030

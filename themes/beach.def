@@ -1,0 +1,27 @@
+/* @name: Beach */
+/* Colorblind safe light theme */
+
+background = #fdf6e3
+foreground = #073642
+comment = #839496
+keyword1 = #268bd2
+keyword2 = #2aa198
+string = #b58900
+number = #2aa198
+match = #cb4b16
+
+line_number = #909098
+line_number_current = #303038
+line_number_dirty = #685820
+line_number_bg = #f0f0f4
+current_line = #e8e8f0
+selection_bg = #2aa198
+selection_fg = #ffffff
+status_bg = #d8d8dc
+status_fg = #505058
+message_bg = #ececf0
+message_fg = #505058
+cursor = #073642
+tilde = #c0c0c8
+bracket_match = #2aa198
+bracket_unmatch = #cb4b16

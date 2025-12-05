@@ -1,30 +1,27 @@
 /* @name: Paper */
-/* Clean white paper theme */
+/* Colorblind safe light theme */
 
-/* Syntax highlighting */
-X(SYNTAX_NORMAL,            30,  30,  30, "Normal text")
-X(SYNTAX_COMMENT,          130, 130, 130, "Comments")
-X(SYNTAX_KEYWORD1,          50, 100, 180, "Keywords - blue")
-X(SYNTAX_KEYWORD2,         140,  80, 160, "Type keywords - purple")
-X(SYNTAX_STRING,            80, 140,  80, "Strings - green")
-X(SYNTAX_NUMBER,           180, 100,  60, "Numbers - orange")
-X(SYNTAX_MATCH,            255, 230, 120, "Search match")
+background = #fefefe
+foreground = #1a1a1a
+comment = #6b7280
+keyword1 = #1d4ed8
+keyword2 = #3b82f6
+string = #ca8a04
+number = #0d9488
+match = #dc2626
 
-/* UI elements */
-X(UI_BACKGROUND,           255, 255, 255, "Background - white")
-X(UI_FOREGROUND,            30,  30,  30, "Foreground")
-X(UI_LINE_NUMBER,          170, 170, 170, "Line numbers")
-X(UI_LINE_NUMBER_CURRENT,   80,  80,  80, "Current line number")
-X(UI_LINE_NUMBER_DIRTY,    200, 120,  60, "Dirty line number")
-X(UI_LINE_NUMBER_BG,       248, 248, 248, "Line number gutter")
-X(UI_CURRENT_LINE,         245, 245, 245, "Current line highlight")
-X(UI_SELECTION_BG,         180, 210, 255, "Selection background")
-X(UI_SELECTION_FG,          30,  30,  30, "Selection text")
-X(UI_STATUS_BG,             50, 100, 180, "Status bar background")
-X(UI_STATUS_FG,            255, 255, 255, "Status bar text")
-X(UI_MESSAGE_BG,            80, 140,  80, "Message bar background")
-X(UI_MESSAGE_FG,           255, 255, 255, "Message bar text")
-X(UI_CURSOR,                30,  30,  30, "Cursor")
-X(UI_TILDE,                210, 210, 210, "Empty line tilde")
-X(UI_BRACKET_MATCH,         50, 100, 180, "Matched bracket")
-X(UI_BRACKET_UNMATCH,      200,  80,  80, "Unmatched bracket")
+line_number = #909098
+line_number_current = #303038
+line_number_dirty = #685820
+line_number_bg = #f0f0f4
+current_line = #e8e8f0
+selection_bg = #3b82f6
+selection_fg = #ffffff
+status_bg = #d8d8dc
+status_fg = #505058
+message_bg = #ececf0
+message_fg = #505058
+cursor = #1a1a1a
+tilde = #c0c0c8
+bracket_match = #0d9488
+bracket_unmatch = #dc2626

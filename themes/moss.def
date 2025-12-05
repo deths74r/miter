@@ -1,0 +1,27 @@
+/* @name: Moss */
+/* Colorblind safe theme */
+
+background = #1a1f1c
+foreground = #d3e0d8
+comment = #6b8078
+keyword1 = #88c0a8
+keyword2 = #a8d8c8
+string = #e8d08f
+number = #9ec8b8
+match = #e8a868
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #88c0a8
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #d3e0d8
+tilde = #303040
+bracket_match = #9ec8b8
+bracket_unmatch = #e8a868

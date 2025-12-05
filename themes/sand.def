@@ -1,30 +1,27 @@
 /* @name: Sand */
-/* Warm desert sand theme */
+/* Colorblind safe light theme */
 
-/* Syntax highlighting */
-X(SYNTAX_NORMAL,            60,  50,  40, "Normal text")
-X(SYNTAX_COMMENT,          150, 140, 125, "Comments")
-X(SYNTAX_KEYWORD1,         160,  90,  50, "Keywords - terracotta")
-X(SYNTAX_KEYWORD2,          90, 130, 160, "Type keywords - dusty blue")
-X(SYNTAX_STRING,           100, 130,  80, "Strings - sage")
-X(SYNTAX_NUMBER,           170, 110,  70, "Numbers - rust")
-X(SYNTAX_MATCH,            255, 220, 150, "Search match")
+background = #f5e6d3
+foreground = #3d2914
+comment = #8b7355
+keyword1 = #1e3a8a
+keyword2 = #2563eb
+string = #b45309
+number = #047857
+match = #b91c1c
 
-/* UI elements */
-X(UI_BACKGROUND,           248, 242, 230, "Background - sand")
-X(UI_FOREGROUND,            60,  50,  40, "Foreground")
-X(UI_LINE_NUMBER,          185, 175, 160, "Line numbers")
-X(UI_LINE_NUMBER_CURRENT,  110, 100,  85, "Current line number")
-X(UI_LINE_NUMBER_DIRTY,    200, 140,  80, "Dirty line number")
-X(UI_LINE_NUMBER_BG,       240, 234, 222, "Line number gutter")
-X(UI_CURRENT_LINE,         242, 235, 220, "Current line highlight")
-X(UI_SELECTION_BG,         220, 200, 170, "Selection background")
-X(UI_SELECTION_FG,          60,  50,  40, "Selection text")
-X(UI_STATUS_BG,            160,  90,  50, "Status bar background")
-X(UI_STATUS_FG,            255, 255, 255, "Status bar text")
-X(UI_MESSAGE_BG,            90, 130, 160, "Message bar background")
-X(UI_MESSAGE_FG,           255, 255, 255, "Message bar text")
-X(UI_CURSOR,                60,  50,  40, "Cursor")
-X(UI_TILDE,                200, 190, 175, "Empty line tilde")
-X(UI_BRACKET_MATCH,        160,  90,  50, "Matched bracket")
-X(UI_BRACKET_UNMATCH,      180,  70,  70, "Unmatched bracket")
+line_number = #909098
+line_number_current = #303038
+line_number_dirty = #685820
+line_number_bg = #f0f0f4
+current_line = #e8e8f0
+selection_bg = #2563eb
+selection_fg = #ffffff
+status_bg = #d8d8dc
+status_fg = #505058
+message_bg = #ececf0
+message_fg = #505058
+cursor = #3d2914
+tilde = #c0c0c8
+bracket_match = #047857
+bracket_unmatch = #b91c1c

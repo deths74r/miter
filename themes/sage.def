@@ -1,0 +1,27 @@
+/* @name: Sage */
+/* Colorblind safe theme */
+
+background = #1e2420
+foreground = #d5dcd7
+comment = #6d7a70
+keyword1 = #8fb573
+keyword2 = #a8c896
+string = #d4b077
+number = #7ec4a3
+match = #e09060
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #8fb573
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #d5dcd7
+tilde = #303040
+bracket_match = #7ec4a3
+bracket_unmatch = #e09060

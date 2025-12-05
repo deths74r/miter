@@ -1,0 +1,27 @@
+/* @name: Cosmos */
+/* Cosmic dark theme - colorblind safe */
+
+background = #100e17
+foreground = #f0f0f5
+comment = #5d5980
+keyword1 = #ff79c6
+keyword2 = #bd93f9
+string = #f1fa8c
+number = #8be9fd
+match = #ffb86c
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #1e1b2a
+selection_bg = #44475a
+selection_fg = #f0f0f5
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #f0f0f5
+tilde = #1e1b2a
+bracket_match = #8be9fd
+bracket_unmatch = #ffb86c

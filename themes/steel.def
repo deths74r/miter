@@ -1,0 +1,27 @@
+/* @name: Steel */
+/* Colorblind safe theme */
+
+background = #1f2937
+foreground = #f3f4f6
+comment = #6b7280
+keyword1 = #60a5fa
+keyword2 = #a5b4fc
+string = #fbbf24
+number = #34d399
+match = #f87171
+
+line_number = #505058
+line_number_current = #c0c0c8
+line_number_dirty = #807860
+line_number_bg = #0c0c10
+current_line = #252530
+selection_bg = #60a5fa
+selection_fg = #ffffff
+status_bg = #2a2a32
+status_fg = #909098
+message_bg = #3a3a42
+message_fg = #b0b0b8
+cursor = #f3f4f6
+tilde = #303040
+bracket_match = #34d399
+bracket_unmatch = #f87171

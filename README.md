@@ -9,7 +9,6 @@ Miter is a lightweight terminal text editor written in C. It's a single-file imp
 - **Undo/redo** with time-based grouping
 - **Incremental search** with match highlighting
 - **Mouse support** - click to position, drag to select, scroll wheel
-- **Menu bar** - GUI-style menus with keyboard and mouse navigation
 - **File browser** - interactive half-screen panel (Ctrl+O)
 - **102 color themes** including accessibility themes for colorblind users
 - **Soft wrap** - visual line wrapping without modifying files
@@ -52,13 +51,6 @@ sudo cp miter /usr/local/bin/
 
 | Shortcut | Description |
 |----------|-------------|
-| **Menu Bar** | |
-| F10 | Open/close menu bar |
-| Alt+M | Toggle menu bar visibility |
-| Arrow Left/Right | Switch between menus (when open) |
-| Arrow Up/Down | Navigate menu items |
-| Enter | Execute selected menu item |
-| ESC | Close menu |
 | **File Operations** | |
 | Ctrl+O | Open file browser |
 | Ctrl+S | Save file |
@@ -121,7 +113,6 @@ sudo cp miter /usr/local/bin/
 | Double-click | Select word |
 | Triple-click | Select line |
 | Scroll wheel | Scroll vertically |
-| Click menu | Open menu dropdown |
 
 ## Themes
 
