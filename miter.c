@@ -5973,7 +5973,7 @@ void file_browser_draw(file_list_item *items, int count, int selected, const cha
       set_background_rgb(&ab, theme_get_color(THEME_UI_MESSAGE_BG));
       set_foreground_rgb(&ab, theme_get_color(THEME_UI_MESSAGE_FG));
 
-      char help[] = " \xe2\x86\x91\xe2\x86\x93/Scroll:Nav Enter/DblClick:Open ESC:Cancel";
+      char help[] = " Up/Down/Scroll:Nav Enter/DblClick:Open ESC:Cancel";
       int help_len = strlen(help);
       if (help_len > panel_width) help_len = panel_width;
       append_buffer_write(&ab, help, help_len);
@@ -6025,10 +6025,9 @@ void file_browser_draw(file_list_item *items, int count, int selected, const cha
     }
   }
 
-  /* Reset colors and show cursor */
+  /* Reset colors, keep cursor hidden during dialog */
   set_background_rgb(&ab, theme_get_color(THEME_UI_BACKGROUND));
   set_foreground_rgb(&ab, theme_get_color(THEME_UI_FOREGROUND));
-  append_buffer_write(&ab, ESCAPE_SHOW_CURSOR, ESCAPE_SHOW_CURSOR_LEN);
 
   write(STDOUT_FILENO, ab.buffer, ab.length);
   append_buffer_destroy(&ab);
